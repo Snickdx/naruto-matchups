@@ -7,6 +7,8 @@ let cy = null; // Cytoscape instance
 let currentLayout = 'cose';
 let currentSort = 'name';
 let sortDirection = 'asc';
+let imageCache = new Map(); // Cache for preloaded images as data URLs
+let mobileSearchFilter = ''; // Filter for mobile character search
 
 // Initialize the application
 async function init() {
@@ -16,9 +18,16 @@ async function init() {
         extractCharacters();
         renderCharacterGrid();
         setupSearch();
+        setupMobileSearch();
         setupSorting();
         setupViewToggle();
+        
+        // Preload images before initializing graph
+        await preloadAllImages();
         initializeGraph();
+        
+        // Select Naruto by default
+        selectCharacter('Naruto Uzumaki');
     } catch (error) {
         console.error('Error loading matchups data:', error);
         document.body.innerHTML = '<div style="text-align: center; padding: 50px; color: white;"><h1>Error loading data</h1><p>Please make sure matchups.json exists</p></div>';
@@ -125,8 +134,16 @@ const characterNameMap = {
 };
 
 // Character image mapping - prioritize local images, fallback to web
-function getCharacterImageUrl(characterName) {
+function getCharacterImageUrl(characterName, forGraph = false) {
     const cleanName = characterName.split('(')[0].trim();
+    
+    // For graph view, use cached URL if available
+    if (forGraph && imageCache.has(cleanName)) {
+        const cached = imageCache.get(cleanName);
+        if (cached) return cached;
+        // If null (failed to load), return empty string (use default background)
+        return '';
+    }
     
     // Check if we have a mapped filename
     let filename = characterNameMap[characterName] || characterNameMap[cleanName];
@@ -137,14 +154,62 @@ function getCharacterImageUrl(characterName) {
         filename = cleanName.replace(/\s+/g, '_');
     }
     
-    // URL-encode the filename to handle special characters (ō, ū, etc.)
-    const encodedFilename = encodeURIComponent(filename);
+    // Return local image URL - browsers handle Unicode filenames natively
+    return `img/${filename}.png`;
+}
+
+// Preload an image and cache it
+function preloadImage(characterName) {
+    return new Promise((resolve) => {
+        const cleanName = characterName.split('(')[0].trim();
+        
+        // Skip if already cached
+        if (imageCache.has(cleanName)) {
+            resolve(imageCache.get(cleanName));
+            return;
+        }
+        
+        const img = new Image();
+        const url = getCharacterImageUrl(characterName, false);
+        
+        img.onload = () => {
+            // Image loaded successfully, cache the URL
+            imageCache.set(cleanName, url);
+            resolve(url);
+        };
+        
+        img.onerror = () => {
+            // Use simple initials as fallback (no external service)
+            imageCache.set(cleanName, null); // null means use default background
+            resolve(null);
+        };
+        
+        img.src = url;
+    });
+}
+
+// Preload all character images
+async function preloadAllImages() {
+    const uniqueNames = new Set();
     
-    // Try local image first (scraped images)
-    const localImageUrl = `img/${encodedFilename}.png`;
+    // Get all unique character names from matchups
+    matchupsData.forEach(entry => {
+        Object.keys(entry).forEach(character => {
+            const cleanName = character.split('(')[0].trim();
+            uniqueNames.add(cleanName);
+        });
+    });
     
-    // Return local image URL (will fallback via onerror handler if not found)
-    return localImageUrl;
+    // Preload in batches to avoid overwhelming the server
+    const names = Array.from(uniqueNames);
+    const batchSize = 10;
+    
+    for (let i = 0; i < names.length; i += batchSize) {
+        const batch = names.slice(i, i + batchSize);
+        await Promise.all(batch.map(name => preloadImage(name)));
+    }
+    
+    console.log(`Preloaded ${imageCache.size} images`);
 }
 
 // Enhanced image loading with multiple fallback sources
@@ -162,9 +227,6 @@ function createImageWithFallback(characterName, className = '') {
         filename = cleanName.replace(/\s+/g, '_');
     }
     
-    // URL-encode the filename to handle special characters
-    const encodedFilename = encodeURIComponent(filename);
-    
     // Create slug for Fandom wiki (fallback)
     const slug = cleanName.toLowerCase()
         .replace(/\s+/g, '_')
@@ -173,12 +235,12 @@ function createImageWithFallback(characterName, className = '') {
     
     // Try multiple image sources in order of preference
     const imageSources = [
-        // Source 1: Local scraped image (primary) - PNG (URL-encoded for special chars)
-        `img/${encodedFilename}.png`,
+        // Source 1: Local scraped image (primary) - PNG
+        `img/${filename}.png`,
         // Source 2: Try with different extensions
-        `img/${encodedFilename}.jpg`,
-        `img/${encodedFilename}.jpeg`,
-        `img/${encodedFilename}.gif`,
+        `img/${filename}.jpg`,
+        `img/${filename}.jpeg`,
+        `img/${filename}.gif`,
         // Source 3: Fandom wiki (fallback)
         `https://vignette.wikia.nocookie.net/naruto/images/thumb/${slug.charAt(0)}/${slug}/revision/latest/scale-to-width-down/200`,
         // Source 4: Alternative Fandom pattern
@@ -210,10 +272,13 @@ function createImageWithFallback(characterName, className = '') {
     return img;
 }
 
-// Render character grid
+// Render character grid (both desktop and mobile)
 function renderCharacterGrid() {
     const grid = document.getElementById('characterGrid');
-    grid.innerHTML = '';
+    const mobileGrid = document.getElementById('mobileCharacterGrid');
+    
+    if (grid) grid.innerHTML = '';
+    if (mobileGrid) mobileGrid.innerHTML = '';
     
     // Sort characters based on current sort
     const sortedCharacters = [...allCharacters].sort((a, b) => {
@@ -244,12 +309,139 @@ function renderCharacterGrid() {
     
     sortedCharacters.forEach(character => {
         const stats = getCharacterStats(character);
-        const card = document.createElement('div');
-        card.className = 'character-card';
-        card.dataset.character = character;
         
-        const img = createImageWithFallback(character);
-        card.innerHTML = `
+        // Create desktop card
+        if (grid) {
+            const card = document.createElement('div');
+            card.className = 'character-card';
+            card.dataset.character = character;
+            
+            const img = createImageWithFallback(character);
+            card.innerHTML = `
+                <h3>${character}</h3>
+                <div class="card-stats">
+                    <span class="card-stat win">W: ${stats.wins}</span>
+                    <span class="card-stat lose">L: ${stats.losses}</span>
+                    <span class="card-stat draw">D: ${stats.draws}</span>
+                </div>
+            `;
+            card.insertBefore(img, card.firstChild);
+            
+            card.addEventListener('click', () => selectCharacter(character));
+            grid.appendChild(card);
+        }
+        
+        // Create mobile card
+        if (mobileGrid) {
+            const mobileCard = document.createElement('div');
+            mobileCard.className = 'character-card';
+            mobileCard.dataset.character = character;
+            
+            const mobileImg = createImageWithFallback(character);
+            mobileCard.innerHTML = `
+                <h3>${character}</h3>
+                <div class="card-stats">
+                    <span class="card-stat win">W: ${stats.wins}</span>
+                    <span class="card-stat lose">L: ${stats.losses}</span>
+                    <span class="card-stat draw">D: ${stats.draws}</span>
+                </div>
+            `;
+            mobileCard.insertBefore(mobileImg, mobileCard.firstChild);
+            
+            mobileCard.addEventListener('click', () => selectCharacterMobile(character));
+            mobileGrid.appendChild(mobileCard);
+        }
+    });
+}
+
+// Select character on mobile (closes sidebar)
+function selectCharacterMobile(characterName) {
+    selectCharacter(characterName);
+    
+    // Close the offcanvas sidebar
+    const offcanvasElement = document.getElementById('characterSidebar');
+    if (offcanvasElement && typeof bootstrap !== 'undefined') {
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) {
+            offcanvas.hide();
+        }
+    }
+}
+
+// Setup mobile search functionality
+function setupMobileSearch() {
+    const mobileSearchInput = document.getElementById('mobileCharacterSearch');
+    
+    if (!mobileSearchInput) return;
+    
+    mobileSearchInput.addEventListener('input', (e) => {
+        mobileSearchFilter = e.target.value.toLowerCase().trim();
+        renderMobileCharacterGrid();
+    });
+    
+    // Clear search on offcanvas open
+    const offcanvasElement = document.getElementById('characterSidebar');
+    if (offcanvasElement) {
+        offcanvasElement.addEventListener('show.bs.offcanvas', () => {
+            mobileSearchInput.value = '';
+            mobileSearchFilter = '';
+            renderMobileCharacterGrid();
+        });
+    }
+}
+
+// Render only mobile character grid (for search filtering)
+function renderMobileCharacterGrid() {
+    const mobileGrid = document.getElementById('mobileCharacterGrid');
+    if (!mobileGrid) return;
+    
+    mobileGrid.innerHTML = '';
+    
+    // Sort characters based on current sort
+    const sortedCharacters = [...allCharacters].sort((a, b) => {
+        const statsA = getCharacterStats(a);
+        const statsB = getCharacterStats(b);
+        let comparison = 0;
+        
+        switch (currentSort) {
+            case 'name':
+                comparison = a.localeCompare(b);
+                break;
+            case 'wins':
+                comparison = statsA.wins - statsB.wins;
+                break;
+            case 'losses':
+                comparison = statsA.losses - statsB.losses;
+                break;
+            case 'draws':
+                comparison = statsA.draws - statsB.draws;
+                break;
+            case 'total':
+                comparison = statsA.total - statsB.total;
+                break;
+        }
+        
+        return sortDirection === 'asc' ? comparison : -comparison;
+    });
+    
+    // Filter characters based on mobile search
+    const filteredCharacters = mobileSearchFilter 
+        ? sortedCharacters.filter(c => c.toLowerCase().includes(mobileSearchFilter))
+        : sortedCharacters;
+    
+    filteredCharacters.forEach(character => {
+        const stats = getCharacterStats(character);
+        
+        const mobileCard = document.createElement('div');
+        mobileCard.className = 'character-card';
+        mobileCard.dataset.character = character;
+        
+        if (character === selectedCharacter) {
+            mobileCard.classList.add('active');
+        }
+        
+        const mobileImg = createImageWithFallback(character);
+        mobileCard.innerHTML = `
             <h3>${character}</h3>
             <div class="card-stats">
                 <span class="card-stat win">W: ${stats.wins}</span>
@@ -257,25 +449,46 @@ function renderCharacterGrid() {
                 <span class="card-stat draw">D: ${stats.draws}</span>
             </div>
         `;
-        card.insertBefore(img, card.firstChild);
+        mobileCard.insertBefore(mobileImg, mobileCard.firstChild);
         
-        card.addEventListener('click', () => selectCharacter(character));
-        grid.appendChild(card);
+        mobileCard.addEventListener('click', () => selectCharacterMobile(character));
+        mobileGrid.appendChild(mobileCard);
     });
+    
+    // Show message if no results
+    if (filteredCharacters.length === 0 && mobileSearchFilter) {
+        mobileGrid.innerHTML = '<div class="no-results">No characters found</div>';
+    }
 }
 
-// Setup sorting controls
+// Setup sorting controls (both desktop and mobile)
 function setupSorting() {
     const sortSelect = document.getElementById('sortSelect');
+    const mobileSortSelect = document.getElementById('mobileSortSelect');
     
-    if (!sortSelect) return;
+    const options = {
+        'name': 'Sort by: Name',
+        'wins': 'Sort by: Wins',
+        'losses': 'Sort by: Losses',
+        'draws': 'Sort by: Draws',
+        'total': 'Sort by: Total Fights'
+    };
     
-    // Set initial value
-    sortSelect.value = currentSort;
-    
-    sortSelect.addEventListener('change', (e) => {
-        const sortType = e.target.value;
+    function updateSortUI(select) {
+        if (!select) return;
+        const directionSymbol = sortDirection === 'asc' ? ' ↑' : ' ↓';
+        select.querySelector(`option[value="${currentSort}"]`).textContent = 
+            options[currentSort] + directionSymbol;
         
+        // Reset other options
+        Object.keys(options).forEach(key => {
+            if (key !== currentSort) {
+                select.querySelector(`option[value="${key}"]`).textContent = options[key];
+            }
+        });
+    }
+    
+    function handleSortChange(sortType, sourceSelect) {
         // Toggle direction if selecting same sort
         if (currentSort === sortType) {
             sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
@@ -285,25 +498,13 @@ function setupSorting() {
             sortDirection = sortType === 'name' ? 'asc' : 'desc';
         }
         
-        // Update dropdown text to show direction
-        const options = {
-            'name': 'Sort by: Name',
-            'wins': 'Sort by: Wins',
-            'losses': 'Sort by: Losses',
-            'draws': 'Sort by: Draws',
-            'total': 'Sort by: Total Fights'
-        };
+        // Update both selects
+        updateSortUI(sortSelect);
+        updateSortUI(mobileSortSelect);
         
-        const directionSymbol = sortDirection === 'asc' ? ' ↑' : ' ↓';
-        sortSelect.querySelector(`option[value="${currentSort}"]`).textContent = 
-            options[currentSort] + directionSymbol;
-        
-        // Reset other options
-        Object.keys(options).forEach(key => {
-            if (key !== currentSort) {
-                sortSelect.querySelector(`option[value="${key}"]`).textContent = options[key];
-            }
-        });
+        // Sync the other select's value
+        if (sortSelect && sortSelect !== sourceSelect) sortSelect.value = currentSort;
+        if (mobileSortSelect && mobileSortSelect !== sourceSelect) mobileSortSelect.value = currentSort;
         
         // Re-render grid with new sort
         renderCharacterGrid();
@@ -317,23 +518,25 @@ function setupSorting() {
                 }
             });
         }
-    });
+    }
     
-    // Double-click to toggle direction
-    sortSelect.addEventListener('dblclick', () => {
-        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-        const options = {
-            'name': 'Sort by: Name',
-            'wins': 'Sort by: Wins',
-            'losses': 'Sort by: Losses',
-            'draws': 'Sort by: Draws',
-            'total': 'Sort by: Total Fights'
-        };
-        const directionSymbol = sortDirection === 'asc' ? ' ↑' : ' ↓';
-        sortSelect.querySelector(`option[value="${currentSort}"]`).textContent = 
-            options[currentSort] + directionSymbol;
-        renderCharacterGrid();
-    });
+    // Desktop sort select
+    if (sortSelect) {
+        sortSelect.value = currentSort;
+        sortSelect.addEventListener('change', (e) => handleSortChange(e.target.value, sortSelect));
+        sortSelect.addEventListener('dblclick', () => {
+            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            updateSortUI(sortSelect);
+            updateSortUI(mobileSortSelect);
+            renderCharacterGrid();
+        });
+    }
+    
+    // Mobile sort select
+    if (mobileSortSelect) {
+        mobileSortSelect.value = currentSort;
+        mobileSortSelect.addEventListener('change', (e) => handleSortChange(e.target.value, mobileSortSelect));
+    }
 }
 
 // Select a character and display their matchups
@@ -432,77 +635,8 @@ function displayMatchups(characterName, matchups) {
 
 // Setup search functionality
 function setupSearch() {
-    const searchInput = document.getElementById('characterSearch');
-    const searchResults = document.getElementById('searchResults');
-    
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        
-        if (query.length === 0) {
-            searchResults.classList.remove('active');
-            searchResults.innerHTML = '';
-            return;
-        }
-        
-        // Filter characters
-        const filtered = allCharacters.filter(char => 
-            char.toLowerCase().includes(query)
-        ).slice(0, 10);
-        
-        if (filtered.length === 0) {
-            searchResults.innerHTML = '<div class="search-result-item" style="cursor: default; color: var(--text-secondary);">No characters found</div>';
-        } else {
-            searchResults.innerHTML = '';
-            filtered.forEach(char => {
-                const item = document.createElement('div');
-                item.className = 'search-result-item';
-                item.dataset.character = char;
-                const img = createImageWithFallback(char);
-                item.appendChild(img);
-                const span = document.createElement('span');
-                span.textContent = char;
-                item.appendChild(span);
-                item.addEventListener('click', () => {
-                    selectCharacter(char);
-                    searchInput.value = '';
-                    searchResults.classList.remove('active');
-                });
-                searchResults.appendChild(item);
-            });
-            
-            // Add click listeners
-            searchResults.querySelectorAll('.search-result-item').forEach(item => {
-                if (item.dataset.character) {
-                    item.addEventListener('click', () => {
-                        selectCharacter(item.dataset.character);
-                        searchInput.value = '';
-                        searchResults.classList.remove('active');
-                    });
-                }
-            });
-        }
-        
-        searchResults.classList.add('active');
-    });
-    
-    // Close search results when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.classList.remove('active');
-        }
-    });
-    
-    // Handle Enter key in search
-    searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const firstResult = searchResults.querySelector('.search-result-item[data-character]');
-            if (firstResult) {
-                selectCharacter(firstResult.dataset.character);
-                searchInput.value = '';
-                searchResults.classList.remove('active');
-            }
-        }
-    });
+    // Desktop search has been removed - search is now only in mobile sidenav
+    // This function is kept for compatibility but does nothing
 }
 
 // Setup view toggle between list and graph
@@ -511,7 +645,6 @@ function setupViewToggle() {
     const characterSelector = document.querySelector('.character-selector');
     const matchupDisplay = document.querySelector('.matchup-display');
     const graphView = document.getElementById('graphVisualization');
-    const searchSection = document.querySelector('.search-section');
     
     viewButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -526,12 +659,10 @@ function setupViewToggle() {
                 characterSelector.style.display = 'flex';
                 matchupDisplay.style.display = 'flex';
                 graphView.style.display = 'none';
-                searchSection.style.display = 'block';
             } else {
                 characterSelector.style.display = 'none';
                 matchupDisplay.style.display = 'none';
                 graphView.style.display = 'flex';
-                searchSection.style.display = 'none';
                 // Resize graph when switching to graph view
                 setTimeout(() => {
                     if (cy) {
@@ -680,7 +811,7 @@ function initializeGraph() {
                     wins: node.wins,
                     losses: node.losses,
                     draws: node.draws,
-                    imageUrl: getCharacterImageUrl(node.name)
+                    imageUrl: getCharacterImageUrl(node.name, true)
                 }
             })),
             ...getFilteredEdges().map((edge, idx) => ({
@@ -699,6 +830,8 @@ function initializeGraph() {
                 style: {
                     'background-image': 'data(imageUrl)',
                     'background-fit': 'cover',
+                    'background-clip': 'node',
+                    'background-image-opacity': 1,
                     'background-color': '#ff6b35',
                     'label': 'data(label)',
                     'width': 80,
@@ -721,7 +854,7 @@ function initializeGraph() {
             {
                 selector: 'node[wins > 10]',
                 style: {
-                    'background-color': '#4caf50',
+                    'border-color': '#4caf50',
                     'width': 100,
                     'height': 100,
                     'font-size': '12px',
@@ -731,7 +864,7 @@ function initializeGraph() {
             {
                 selector: 'node[losses > 5]',
                 style: {
-                    'background-color': '#f44336',
+                    'border-color': '#f44336',
                     'width': 90,
                     'height': 90,
                     'border-width': 4
@@ -763,8 +896,7 @@ function initializeGraph() {
                 selector: 'node:selected',
                 style: {
                     'border-width': 5,
-                    'border-color': '#ffffff',
-                    'background-color': '#ff9800'
+                    'border-color': '#ffffff'
                 }
             },
             {

@@ -9,20 +9,44 @@
     <link rel="icon" type="image/png" href="img/Naruto_Uzumaki.png">
     <link rel="apple-touch-icon" href="img/Naruto_Uzumaki.png">
     <title>Naruto Character Matchups</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Mobile Side Nav (Offcanvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="characterSidebar" aria-labelledby="characterSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="characterSidebarLabel">🔥 Naruto Matchups</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mobile-search-section">
+                <input type="text" id="mobileCharacterSearch" placeholder="🔍 Search characters..." autocomplete="off">
+            </div>
+            <div class="mobile-sort-controls">
+                <select id="mobileSortSelect" class="sort-select">
+                    <option value="name">Sort by: Name</option>
+                    <option value="wins">Sort by: Wins</option>
+                    <option value="losses">Sort by: Losses</option>
+                    <option value="draws">Sort by: Draws</option>
+                    <option value="total">Sort by: Total Fights</option>
+                </select>
+            </div>
+            <div id="mobileCharacterGrid" class="mobile-character-grid">
+                <!-- Mobile characters will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <nav class="navbar">
             <div class="navbar-left">
-                <h1>🔥 Naruto Character Matchups 🔥</h1>
-                <p class="subtitle">Explore fight records of your favorite characters</p>
-            </div>
-            <div class="navbar-center">
-                <div class="search-section">
-                    <input type="text" id="characterSearch" placeholder="Search for a character..." autocomplete="off">
-                    <div id="searchResults" class="search-results"></div>
-                </div>
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#characterSidebar" aria-controls="characterSidebar">
+                    <span class="hamburger-icon">☰</span>
+                </button>
+                <h1 class="navbar-title">🔥 Naruto Character Matchups 🔥</h1>
             </div>
             <div class="navbar-right">
                 <div class="view-toggle">
@@ -92,32 +116,25 @@
 
             <div class="graph-visualization" id="graphVisualization" style="display: none;">
                 <div class="graph-controls">
-                    <div class="controls-header">
-                        <h2>Win Chain Visualization</h2>
-                        <button id="fullscreenBtn" class="control-btn fullscreen-btn">⛶ Fullscreen</button>
-                    </div>
                     <div class="controls-row">
-                        <div class="control-group">
-                            <button id="resetGraph" class="control-btn">🔄 Reset</button>
-                            <button id="layoutGraph" class="control-btn">🎨 Layout</button>
-                            <button id="zoomIn" class="control-btn">➕ Zoom In</button>
-                            <button id="zoomOut" class="control-btn">➖ Zoom Out</button>
-                        </div>
-                        <div class="control-group">
-                            <label class="filter-label">
-                                <input type="checkbox" id="showDraws" checked> Show Draws
-                            </label>
-                            <label class="filter-label">
-                                <input type="checkbox" id="showLosses" checked> Show Losses
-                            </label>
-                            <select id="layoutSelect" class="layout-select">
-                                <option value="breadthfirst">Breadth First</option>
-                                <option value="cose" selected>Force Directed</option>
-                                <option value="grid">Grid</option>
-                                <option value="circle">Circle</option>
-                                <option value="concentric">Concentric</option>
-                            </select>
-                        </div>
+                        <button id="resetGraph" class="control-btn">🔄 Reset</button>
+                        <button id="layoutGraph" class="control-btn">🎨 Layout</button>
+                        <button id="zoomIn" class="control-btn">➕</button>
+                        <button id="zoomOut" class="control-btn">➖</button>
+                        <button id="fullscreenBtn" class="control-btn">⛶</button>
+                        <label class="filter-label">
+                            <input type="checkbox" id="showDraws" checked> Draws
+                        </label>
+                        <label class="filter-label">
+                            <input type="checkbox" id="showLosses" checked> Losses
+                        </label>
+                        <select id="layoutSelect" class="layout-select">
+                            <option value="breadthfirst">Breadth First</option>
+                            <option value="cose" selected>Force Directed</option>
+                            <option value="grid">Grid</option>
+                            <option value="circle">Circle</option>
+                            <option value="concentric">Concentric</option>
+                        </select>
                     </div>
                     <div class="graph-info">
                         <span id="nodeCount">Nodes: 0</span>
@@ -134,6 +151,8 @@
     <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
     <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
     <script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
