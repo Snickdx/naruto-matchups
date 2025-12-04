@@ -35,12 +35,57 @@ A beautiful, interactive vanilla JavaScript website to visualize Naruto characte
 
 ```
 naruto/
-├── index.html          # Main HTML file
-├── style.css           # Stylesheet with modern design
-├── script.js           # JavaScript logic and data handling
-├── matchups.json       # Character matchup data
-└── README.md          # This file
+├── public/
+│   ├── index.html          # Main HTML file
+│   ├── style.css           # Stylesheet with modern design
+│   ├── script.js           # JavaScript logic and data handling
+│   ├── matchups.json       # Character matchup data
+│   ├── manifest.json       # PWA manifest
+│   ├── img/                # Character profile images
+│   └── icons/              # App icons
+├── scraper/                # Python scripts for image scraping
+└── README.md               # This file
 ```
+
+## Contribution
+
+We welcome contributions to improve the character data and images!
+
+### Adding Missing Character Images
+
+If you notice a character missing a profile picture:
+
+1.  Find a high-quality image of the character (preferably a square portrait).
+2.  Save it as a **PNG** file.
+3.  Name the file using the format `Firstname_Lastname.png`. Replace spaces with underscores.
+    *   Example: "Naruto Uzumaki" -> `Naruto_Uzumaki.png`
+    *   Example: "Might Guy" -> `Might_Guy.png`
+4.  Place the file in the `public/img/` directory.
+
+### Updating Matchups
+
+To add missing fights or correct existing ones:
+
+1.  Open `public/matchups.json`.
+2.  Find the entry for the character you want to update (or add a new object if they don't exist).
+3.  Add the opponent and the result to their list.
+
+**Format Example:**
+
+```json
+{
+    "Naruto Uzumaki": [
+        { "Sasuke Uchiha": "win" },
+        { "Neji Hyūga": "win" },
+        { "Gaara": "win" }
+    ]
+}
+```
+
+*   **Key**: The character's full name.
+*   **Value**: An array of objects, where each object key is the opponent's name and the value is the result (`"win"`, `"lose"`, or `"draw"`).
+
+**Note:** The visualization works best when connections are consistent (e.g., if A beat B, ensure B's record shows a loss to A), but the app handles inconsistencies gracefully.
 
 ## Libraries Used
 
