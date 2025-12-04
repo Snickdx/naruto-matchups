@@ -82,6 +82,23 @@ body {
     align-items: center;
     flex-shrink: 0;
     height: 40px;
+    gap: 12px;
+}
+
+.github-link {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.github-link:hover {
+    color: var(--primary-color);
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .view-toggle {
