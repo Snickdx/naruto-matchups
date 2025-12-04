@@ -727,6 +727,17 @@ body {
     height: calc(100vh - 10vh - 60px);
 }
 
+/* Ensure hidden state is respected when set by JS */
+.graph-visualization[style*="display: none"],
+.graph-visualization[style*="display:none"] {
+    display: none !important;
+}
+
+.matchup-display[style*="display: none"],
+.matchup-display[style*="display:none"] {
+    display: none !important;
+}
+
 .graph-visualization.fullscreen {
     position: fixed;
     top: 0;
