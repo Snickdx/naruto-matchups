@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="Explore fight records and win chains of Naruto characters.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <title>Naruto Character Matchups</title>
+    <!-- Styles loaded via JS module -->
+</head>
+<body>
+    <!-- Mobile Side Nav (Offcanvas) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="characterSidebar" aria-labelledby="characterSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="characterSidebarLabel">🔥 Naruto Matchups <span class="version">v__APP_VERSION__</span></h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mobile-search-section">
+                <input type="text" id="mobileCharacterSearch" placeholder="🔍 Search characters..." autocomplete="off">
+            </div>
+            <div class="mobile-sort-controls">
+                <select id="mobileSortSelect" class="sort-select">
+                    <option value="name">Sort by: Name</option>
+                    <option value="wins">Sort by: Wins</option>
+                    <option value="losses">Sort by: Losses</option>
+                    <option value="draws">Sort by: Draws</option>
+                    <option value="total">Sort by: Total Fights</option>
+                </select>
+            </div>
+            <div id="mobileCharacterGrid" class="mobile-character-grid">
+                <!-- Mobile characters will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#characterSidebar" aria-controls="characterSidebar">
+                    <span class="hamburger-icon">☰</span>
+                </button>
+                <h1 class="navbar-title">🔥 Naruto Character Matchups 🔥 <span class="version">v__APP_VERSION__</span></h1>
+            </div>
+            <div class="navbar-right">
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="list">📋 List</button>
+                    <button class="view-btn" data-view="graph">📊 Graph</button>
+                </div>
+                <a href="https://github.com/Snickdx/naruto-matchups" target="_blank" class="github-link" title="View on GitHub">
+                    <svg height="24" width="24" viewBox="0 0 16 16" version="1.1" class="github-icon" aria-hidden="true">
+                        <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+
+            <div class="main-content">
+                <div class="character-selector">
+                    <div class="sort-controls">
+                        <select id="sortSelect" class="sort-select">
+                            <option value="name">Sort by: Name</option>
+                            <option value="wins">Sort by: Wins</option>
+                            <option value="losses">Sort by: Losses</option>
+                            <option value="draws">Sort by: Draws</option>
+                            <option value="total">Sort by: Total Fights</option>
+                        </select>
+                    </div>
+                    <div class="character-grid-wrapper">
+                        <div id="characterGrid" class="character-grid">
+                            <!-- Characters will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+            <div class="matchup-display" id="matchupDisplay" style="display: none;">
+                <div class="selected-character-header">
+                    <img id="selectedCharacterImage" src="" alt="Character" class="character-profile-large">
+                    <div class="character-info">
+                        <h2 id="selectedCharacterName">Select a character</h2>
+                        <div class="stats">
+                            <span class="stat-item">
+                                <span class="stat-label">Total Fights:</span>
+                                <span id="totalFights" class="stat-value">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Wins:</span>
+                                <span id="winsCount" class="stat-value win">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Losses:</span>
+                                <span id="lossesCount" class="stat-value lose">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Draws:</span>
+                                <span id="drawsCount" class="stat-value draw">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Win %:</span>
+                                <span id="winPercentage" class="stat-value win">0%</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="matchups-section">
+                    <h3>Fight Record</h3>
+                    <div id="matchupsList" class="matchups-list">
+                        <!-- Matchups will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-visualization" id="graphVisualization" style="display: none;">
+                <div class="graph-controls">
+                    <div class="controls-row">
+                        <button id="resetGraph" class="control-btn">🔄 Reset</button>
+                        <button id="layoutGraph" class="control-btn">🎨 Layout</button>
+                        <button id="zoomIn" class="control-btn">➕</button>
+                        <button id="zoomOut" class="control-btn">➖</button>
+                        <button id="fullscreenBtn" class="control-btn">⛶</button>
+                        <label class="filter-label">
+                            <input type="checkbox" id="showDraws" checked> Draws
+                        </label>
+                        <label class="filter-label">
+                            <input type="checkbox" id="showLosses" checked> Losses
+                        </label>
+                        <select id="layoutSelect" class="layout-select">
+                            <option value="breadthfirst">Breadth First</option>
+                            <option value="cose" selected>Force Directed</option>
+                            <option value="grid">Grid</option>
+                            <option value="circle">Circle</option>
+                            <option value="concentric">Concentric</option>
+                        </select>
+                    </div>
+                    <div class="graph-info">
+                        <span id="nodeCount">Nodes: 0</span>
+                        <span id="edgeCount">Edges: 0</span>
+                        <span id="zoomLevel">Zoom: 100%</span>
+                    </div>
+                </div>
+                <div id="cy" class="cytoscape-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Module -->
+    <script type="module" src="main.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration.scope);
+              
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // New version available - show update prompt
+                    if (confirm('A new version is available! Reload to update?')) {
+                      newWorker.postMessage('skipWaiting');
+                      window.location.reload();
+                    }
+                  }
+                });
+              });
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+        
+        // Reload when new service worker takes control
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          window.location.reload();
+        });
+      }
+    </script>
+</body>
+</html>
+
