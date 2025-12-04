@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="Explore fight records and win chains of Naruto characters.">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="img/Naruto_Uzumaki.png">
+    <link rel="apple-touch-icon" href="img/Naruto_Uzumaki.png">
+    <title>Naruto Character Matchups</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <h1>🔥 Naruto Character Matchups 🔥</h1>
+                <p class="subtitle">Explore fight records of your favorite characters</p>
+            </div>
+            <div class="navbar-center">
+                <div class="search-section">
+                    <input type="text" id="characterSearch" placeholder="Search for a character..." autocomplete="off">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="list">📋 List</button>
+                    <button class="view-btn" data-view="graph">📊 Graph</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content-wrapper">
+
+            <div class="main-content">
+                <div class="character-selector">
+                    <div class="sort-controls">
+                        <select id="sortSelect" class="sort-select">
+                            <option value="name">Sort by: Name</option>
+                            <option value="wins">Sort by: Wins</option>
+                            <option value="losses">Sort by: Losses</option>
+                            <option value="draws">Sort by: Draws</option>
+                            <option value="total">Sort by: Total Fights</option>
+                        </select>
+                    </div>
+                    <div class="character-grid-wrapper">
+                        <div id="characterGrid" class="character-grid">
+                            <!-- Characters will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+            <div class="matchup-display" id="matchupDisplay" style="display: none;">
+                <div class="selected-character-header">
+                    <img id="selectedCharacterImage" src="" alt="Character" class="character-profile-large">
+                    <div class="character-info">
+                        <h2 id="selectedCharacterName">Select a character</h2>
+                        <div class="stats">
+                            <span class="stat-item">
+                                <span class="stat-label">Total Fights:</span>
+                                <span id="totalFights" class="stat-value">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Wins:</span>
+                                <span id="winsCount" class="stat-value win">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Losses:</span>
+                                <span id="lossesCount" class="stat-value lose">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Draws:</span>
+                                <span id="drawsCount" class="stat-value draw">0</span>
+                            </span>
+                            <span class="stat-item">
+                                <span class="stat-label">Win %:</span>
+                                <span id="winPercentage" class="stat-value win">0%</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="matchups-section">
+                    <h3>Fight Record</h3>
+                    <div id="matchupsList" class="matchups-list">
+                        <!-- Matchups will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-visualization" id="graphVisualization" style="display: none;">
+                <div class="graph-controls">
+                    <div class="controls-header">
+                        <h2>Win Chain Visualization</h2>
+                        <button id="fullscreenBtn" class="control-btn fullscreen-btn">⛶ Fullscreen</button>
+                    </div>
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <button id="resetGraph" class="control-btn">🔄 Reset</button>
+                            <button id="layoutGraph" class="control-btn">🎨 Layout</button>
+                            <button id="zoomIn" class="control-btn">➕ Zoom In</button>
+                            <button id="zoomOut" class="control-btn">➖ Zoom Out</button>
+                        </div>
+                        <div class="control-group">
+                            <label class="filter-label">
+                                <input type="checkbox" id="showDraws" checked> Show Draws
+                            </label>
+                            <label class="filter-label">
+                                <input type="checkbox" id="showLosses" checked> Show Losses
+                            </label>
+                            <select id="layoutSelect" class="layout-select">
+                                <option value="breadthfirst">Breadth First</option>
+                                <option value="cose" selected>Force Directed</option>
+                                <option value="grid">Grid</option>
+                                <option value="circle">Circle</option>
+                                <option value="concentric">Concentric</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="graph-info">
+                        <span id="nodeCount">Nodes: 0</span>
+                        <span id="edgeCount">Edges: 0</span>
+                        <span id="zoomLevel">Zoom: 100%</span>
+                    </div>
+                </div>
+                <div id="cy" class="cytoscape-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+    <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-cose-bilkent@4.1.0/cytoscape-cose-bilkent.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
