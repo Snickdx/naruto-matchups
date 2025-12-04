@@ -35,12 +35,18 @@ async function minifyJS(code) {
 function versionInjector() {
   return {
     name: 'version-injector',
+    // Log version on build start
     buildStart() {
       console.log(`\n📦 Building Naruto Matchups v${version}\n`);
     },
-    transformIndexHtml(html) {
-      return html.replace(/__APP_VERSION__/g, version);
+    // Replace __APP_VERSION__ in HTML (works in both dev and build)
+    transformIndexHtml: {
+      order: 'pre',
+      handler(html) {
+        return html.replace(/__APP_VERSION__/g, version);
+      }
     },
+    // Replace __APP_VERSION__ in JS files (works in both dev and build)
     transform(code, id) {
       if (id.endsWith('.js') || id.endsWith('.ts')) {
         return code.replace(/__APP_VERSION__/g, version);

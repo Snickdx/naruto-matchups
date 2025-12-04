@@ -2,7 +2,7 @@
   "name": "Naruto Matchups",
   "short_name": "Naruto Matchups",
   "version": "__APP_VERSION__",
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#ff6b35",

@@ -5,50 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#ff6b35">
     <meta name="description" content="Explore fight records and win chains of Naruto characters.">
-    <link rel="manifest" href="./assets/manifest-BO90cRfy.json">
+    <link rel="manifest" href="./assets/manifest-KTZ3Qdo1.json">
     <link rel="icon" type="image/x-icon" href="./assets/favicon-DnF950Ma.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32-DJAhRzkJ.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16-Cb7Jr2sM.png">
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon-DxyL4kRS.png">
     <title>Naruto Character Matchups</title>
-    <!-- Styles loaded via JS module -->
-  <script type="module" crossorigin src="./assets/main-D2aAyo-8.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-CWY8j412.css">
+  <script type="module" crossorigin src="./assets/main-DWMmD1xe.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-Be0YLTA6.css">
 </head>
 <body>
-    <!-- Mobile Side Nav (Offcanvas) -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="characterSidebar" aria-labelledby="characterSidebarLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="characterSidebarLabel">🔥 Naruto Matchups <span class="version">v1.1.2</span></h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="mobile-search-section">
-                <input type="text" id="mobileCharacterSearch" placeholder="🔍 Search characters..." autocomplete="off">
-            </div>
-            <div class="mobile-sort-controls">
-                <select id="mobileSortSelect" class="sort-select">
-                    <option value="name">Sort by: Name</option>
-                    <option value="wins">Sort by: Wins</option>
-                    <option value="losses">Sort by: Losses</option>
-                    <option value="draws">Sort by: Draws</option>
-                    <option value="total">Sort by: Total Fights</option>
-                </select>
-            </div>
-            <div id="mobileCharacterGrid" class="mobile-character-grid">
-                <!-- Mobile characters will be loaded here -->
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <nav class="navbar">
             <div class="navbar-left">
-                <!-- Mobile menu button -->
-                <button class="mobile-menu-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#characterSidebar" aria-controls="characterSidebar">
-                    <span class="hamburger-icon">☰</span>
-                </button>
-                <h1 class="navbar-title">🔥 Naruto Character Matchups 🔥 <span class="version">v1.1.2</span></h1>
+                <h1 class="navbar-title">🔥 Naruto Matchups <span class="version">v1.3.1</span></h1>
             </div>
             <div class="navbar-right">
                 <div class="view-toggle">
@@ -64,63 +34,97 @@
         </nav>
 
         <div class="content-wrapper">
-
-            <div class="main-content">
-                <div class="character-selector">
-                    <div class="sort-controls">
-                        <select id="sortSelect" class="sort-select">
-                            <option value="name">Sort by: Name</option>
-                            <option value="wins">Sort by: Wins</option>
-                            <option value="losses">Sort by: Losses</option>
-                            <option value="draws">Sort by: Draws</option>
-                            <option value="total">Sort by: Total Fights</option>
-                        </select>
-                    </div>
-                    <div class="character-grid-wrapper">
-                        <div id="characterGrid" class="character-grid">
-                            <!-- Characters will be loaded here -->
-                        </div>
-                    </div>
+            <!-- List View Container -->
+            <div class="list-view-container" id="listViewContainer">
+                <!-- Mobile Tab Navigation (hidden on desktop) -->
+                <div class="mobile-tabs">
+                    <button class="mobile-tab active" data-tab="characters" id="charactersTab">
+                        <span class="tab-icon">👥</span>
+                        <span class="tab-text">Characters</span>
+                    </button>
+                    <button class="mobile-tab" data-tab="details" id="detailsTab" disabled>
+                        <span class="tab-icon">⚔️</span>
+                        <span class="tab-text">Fight Record</span>
+                        <span class="selected-name" id="selectedTabName"></span>
+                    </button>
                 </div>
 
-            <div class="matchup-display" id="matchupDisplay" style="display: none;">
-                <div class="selected-character-header">
-                    <img id="selectedCharacterImage" src="" alt="Character" class="character-profile-large">
-                    <div class="character-info">
-                        <h2 id="selectedCharacterName">Select a character</h2>
-                        <div class="stats">
-                            <span class="stat-item">
-                                <span class="stat-label">Total Fights:</span>
-                                <span id="totalFights" class="stat-value">0</span>
-                            </span>
-                            <span class="stat-item">
-                                <span class="stat-label">Wins:</span>
-                                <span id="winsCount" class="stat-value win">0</span>
-                            </span>
-                            <span class="stat-item">
-                                <span class="stat-label">Losses:</span>
-                                <span id="lossesCount" class="stat-value lose">0</span>
-                            </span>
-                            <span class="stat-item">
-                                <span class="stat-label">Draws:</span>
-                                <span id="drawsCount" class="stat-value draw">0</span>
-                            </span>
-                            <span class="stat-item">
-                                <span class="stat-label">Win %:</span>
-                                <span id="winPercentage" class="stat-value win">0%</span>
-                            </span>
+                <!-- Master-Detail Layout -->
+                <div class="master-detail">
+                    <!-- Master Panel (Character List) -->
+                    <div class="master-panel" id="charactersPanel">
+                        <div class="panel-header">
+                            <div class="search-section">
+                                <input type="text" id="characterSearch" placeholder="🔍 Search characters..." autocomplete="off">
+                            </div>
+                            <div class="sort-controls">
+                                <select id="sortSelect" class="sort-select">
+                                    <option value="name">Sort by: Name</option>
+                                    <option value="wins">Sort by: Wins</option>
+                                    <option value="losses">Sort by: Losses</option>
+                                    <option value="draws">Sort by: Draws</option>
+                                    <option value="total">Sort by: Total Fights</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="character-grid-wrapper">
+                            <div id="characterGrid" class="character-grid">
+                                <!-- Characters will be loaded here -->
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="matchups-section">
-                    <h3>Fight Record</h3>
-                    <div id="matchupsList" class="matchups-list">
-                        <!-- Matchups will be displayed here -->
+                    <!-- Detail Panel (Fight Record) -->
+                    <div class="detail-panel" id="detailsPanel">
+                        <!-- Mobile back button (hidden on desktop) -->
+                        <div class="mobile-back-header">
+                            <button class="back-btn" id="backToCharacters">
+                                <span class="back-arrow">←</span>
+                                <span class="back-text">Characters</span>
+                            </button>
+                        </div>
+                        <div class="matchup-display" id="matchupDisplay">
+                            <div class="selected-character-header">
+                                <img id="selectedCharacterImage" src="" alt="Character" class="character-profile-large">
+                                <div class="character-info">
+                                    <h2 id="selectedCharacterName">Select a character</h2>
+                                    <div class="stats">
+                                        <span class="stat-item">
+                                            <span class="stat-label">Total Fights:</span>
+                                            <span id="totalFights" class="stat-value">0</span>
+                                        </span>
+                                        <span class="stat-item">
+                                            <span class="stat-label">Wins:</span>
+                                            <span id="winsCount" class="stat-value win">0</span>
+                                        </span>
+                                        <span class="stat-item">
+                                            <span class="stat-label">Losses:</span>
+                                            <span id="lossesCount" class="stat-value lose">0</span>
+                                        </span>
+                                        <span class="stat-item">
+                                            <span class="stat-label">Draws:</span>
+                                            <span id="drawsCount" class="stat-value draw">0</span>
+                                        </span>
+                                        <span class="stat-item">
+                                            <span class="stat-label">Win %:</span>
+                                            <span id="winPercentage" class="stat-value win">0%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="matchups-section">
+                                <h3>Fight Record</h3>
+                                <div id="matchupsList" class="matchups-list">
+                                    <!-- Matchups will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Graph View -->
             <div class="graph-visualization" id="graphVisualization" style="display: none;">
                 <div class="graph-controls">
                     <div class="controls-row">
@@ -191,4 +195,3 @@
     </script>
 </body>
 </html>
-

@@ -8,11 +8,23 @@ let currentLayout = 'cose';
 let currentSort = 'name';
 let sortDirection = 'asc';
 let imageCache = new Map(); // Cache for preloaded images as data URLs
-let mobileSearchFilter = ''; // Filter for mobile character search
+let searchFilter = ''; // Filter for character search
+let currentPanel = 'characters'; // Track current panel (mobile only)
+let isMobile = false; // Track if we're on mobile
+
+// Check if device is mobile
+function checkMobile() {
+    isMobile = window.innerWidth <= 768;
+    return isMobile;
+}
 
 // Initialize the application
 async function init() {
     try {
+        // Check initial device type
+        checkMobile();
+        window.addEventListener('resize', handleResize);
+        
         const response = await fetch('matchups.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -27,9 +39,12 @@ async function init() {
         extractCharacters();
         renderCharacterGrid();
         setupSearch();
-        setupMobileSearch();
         setupSorting();
         setupViewToggle();
+        setupMobileNavigation();
+        
+        // Initialize panel visibility
+        updatePanelVisibility();
         
         // Preload images before initializing graph
         await preloadAllImages();
@@ -54,6 +69,54 @@ async function init() {
             <p style="font-size: 0.8em; opacity: 0.7;">${error.message}</p>
             <p style="font-size: 0.6em; opacity: 0.5; white-space: pre-wrap; text-align: left; max-width: 800px; margin: 20px auto;">${error.stack}</p>
         </div>`;
+    }
+}
+
+// Handle window resize
+function handleResize() {
+    const wasMobile = isMobile;
+    checkMobile();
+    
+    // If switching between mobile and desktop, update panel visibility
+    if (wasMobile !== isMobile) {
+        updatePanelVisibility();
+    }
+}
+
+// Update panel visibility based on device type
+function updatePanelVisibility() {
+    const charactersPanel = document.getElementById('charactersPanel');
+    const detailsPanel = document.getElementById('detailsPanel');
+    
+    if (isMobile) {
+        // Mobile: show only active panel
+        if (currentPanel === 'characters') {
+            charactersPanel?.classList.add('active');
+            detailsPanel?.classList.remove('active');
+        } else {
+            charactersPanel?.classList.remove('active');
+            detailsPanel?.classList.add('active');
+        }
+    } else {
+        // Desktop: show both panels (remove active class, let CSS handle display)
+        charactersPanel?.classList.remove('active');
+        detailsPanel?.classList.remove('active');
+    }
+    
+    updateTabState();
+}
+
+// Update tab state based on current panel
+function updateTabState() {
+    const charactersTab = document.getElementById('charactersTab');
+    const detailsTab = document.getElementById('detailsTab');
+    
+    if (currentPanel === 'characters') {
+        charactersTab?.classList.add('active');
+        detailsTab?.classList.remove('active');
+    } else {
+        charactersTab?.classList.remove('active');
+        detailsTab?.classList.add('active');
     }
 }
 
@@ -182,11 +245,10 @@ function getCharacterImageUrl(characterName, forGraph = false) {
     
     if (!filename) {
         // Create filename from character name (matches scraper output)
-        // Keep special characters like ō, ū as they are in the actual filenames
         filename = cleanName.replace(/\s+/g, '_');
     }
     
-    // Return local image URL - browsers handle Unicode filenames natively
+    // Return local image URL
     return `img/${filename}.png`;
 }
 
@@ -263,8 +325,6 @@ function createImageWithFallback(characterName, className = '') {
     let filename = characterNameMap[characterName] || characterNameMap[cleanName];
     
     if (!filename) {
-        // Create filename from character name (matches scraper output)
-        // Keep special characters like ō, ū as they are in the actual filenames
         filename = cleanName.replace(/\s+/g, '_');
     }
     
@@ -276,17 +336,12 @@ function createImageWithFallback(characterName, className = '') {
     
     // Try multiple image sources in order of preference
     const imageSources = [
-        // Source 1: Local scraped image (primary) - PNG
         `img/${filename}.png`,
-        // Source 2: Try with different extensions
         `img/${filename}.jpg`,
         `img/${filename}.jpeg`,
         `img/${filename}.gif`,
-        // Source 3: Fandom wiki (fallback)
         `https://vignette.wikia.nocookie.net/naruto/images/thumb/${slug.charAt(0)}/${slug}/revision/latest/scale-to-width-down/200`,
-        // Source 4: Alternative Fandom pattern
         `https://static.wikia.nocookie.net/naruto/images/thumb/${slug.charAt(0)}/${slug}/revision/latest/scale-to-width-down/200`,
-        // Source 5: Generated avatar (final fallback)
         `https://ui-avatars.com/api/?name=${encodedName}&background=ff6b35&color=fff&size=200&bold=true&font-size=0.4`
     ];
     
@@ -313,130 +368,12 @@ function createImageWithFallback(characterName, className = '') {
     return img;
 }
 
-// Render character grid (both desktop and mobile)
+// Render character grid
 function renderCharacterGrid() {
     const grid = document.getElementById('characterGrid');
-    const mobileGrid = document.getElementById('mobileCharacterGrid');
+    if (!grid) return;
     
-    if (grid) grid.innerHTML = '';
-    if (mobileGrid) mobileGrid.innerHTML = '';
-    
-    // Sort characters based on current sort
-    const sortedCharacters = [...allCharacters].sort((a, b) => {
-        const statsA = getCharacterStats(a);
-        const statsB = getCharacterStats(b);
-        let comparison = 0;
-        
-        switch (currentSort) {
-            case 'name':
-                comparison = a.localeCompare(b);
-                break;
-            case 'wins':
-                comparison = statsA.wins - statsB.wins;
-                break;
-            case 'losses':
-                comparison = statsA.losses - statsB.losses;
-                break;
-            case 'draws':
-                comparison = statsA.draws - statsB.draws;
-                break;
-            case 'total':
-                comparison = statsA.total - statsB.total;
-                break;
-        }
-        
-        return sortDirection === 'asc' ? comparison : -comparison;
-    });
-    
-    sortedCharacters.forEach(character => {
-        const stats = getCharacterStats(character);
-        
-        // Create desktop card
-        if (grid) {
-            const card = document.createElement('div');
-            card.className = 'character-card';
-            card.dataset.character = character;
-            
-            const img = createImageWithFallback(character);
-            card.innerHTML = `
-                <h3>${character}</h3>
-                <div class="card-stats">
-                    <span class="card-stat win">W: ${stats.wins}</span>
-                    <span class="card-stat lose">L: ${stats.losses}</span>
-                    <span class="card-stat draw">D: ${stats.draws}</span>
-                </div>
-            `;
-            card.insertBefore(img, card.firstChild);
-            
-            card.addEventListener('click', () => selectCharacter(character));
-            grid.appendChild(card);
-        }
-        
-        // Create mobile card
-        if (mobileGrid) {
-            const mobileCard = document.createElement('div');
-            mobileCard.className = 'character-card';
-            mobileCard.dataset.character = character;
-            
-            const mobileImg = createImageWithFallback(character);
-            mobileCard.innerHTML = `
-                <h3>${character}</h3>
-                <div class="card-stats">
-                    <span class="card-stat win">W: ${stats.wins}</span>
-                    <span class="card-stat lose">L: ${stats.losses}</span>
-                    <span class="card-stat draw">D: ${stats.draws}</span>
-                </div>
-            `;
-            mobileCard.insertBefore(mobileImg, mobileCard.firstChild);
-            
-            mobileCard.addEventListener('click', () => selectCharacterMobile(character));
-            mobileGrid.appendChild(mobileCard);
-        }
-    });
-}
-
-// Select character on mobile (closes sidebar)
-function selectCharacterMobile(characterName) {
-    selectCharacter(characterName);
-    
-    // Close the offcanvas sidebar
-    const offcanvasElement = document.getElementById('characterSidebar');
-    if (offcanvasElement && typeof bootstrap !== 'undefined') {
-        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-        if (offcanvas) {
-            offcanvas.hide();
-        }
-    }
-}
-
-// Setup mobile search functionality
-function setupMobileSearch() {
-    const mobileSearchInput = document.getElementById('mobileCharacterSearch');
-    
-    if (!mobileSearchInput) return;
-    
-    mobileSearchInput.addEventListener('input', (e) => {
-        mobileSearchFilter = e.target.value.toLowerCase().trim();
-        renderMobileCharacterGrid();
-    });
-    
-    // Clear search on offcanvas open
-    const offcanvasElement = document.getElementById('characterSidebar');
-    if (offcanvasElement) {
-        offcanvasElement.addEventListener('show.bs.offcanvas', () => {
-            mobileSearchInput.value = '';
-            mobileSearchFilter = '';
-            renderMobileCharacterGrid();
-        });
-    }
-}
-
-// Render only mobile character grid (for search filtering)
-function renderMobileCharacterGrid() {
-    const mobileGrid = document.getElementById('mobileCharacterGrid');
-    if (!mobileGrid) return;
-    
-    mobileGrid.innerHTML = '';
+    grid.innerHTML = '';
     
     // Sort characters based on current sort
     const sortedCharacters = [...allCharacters].sort((a, b) => {
@@ -465,24 +402,29 @@ function renderMobileCharacterGrid() {
         return sortDirection === 'asc' ? comparison : -comparison;
     });
     
-    // Filter characters based on mobile search
-    const filteredCharacters = mobileSearchFilter 
-        ? sortedCharacters.filter(c => c.toLowerCase().includes(mobileSearchFilter))
+    // Filter characters based on search
+    const filteredCharacters = searchFilter 
+        ? sortedCharacters.filter(c => c.toLowerCase().includes(searchFilter))
         : sortedCharacters;
+    
+    if (filteredCharacters.length === 0 && searchFilter) {
+        grid.innerHTML = '<div class="no-results" style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 40px;">No characters found matching your search.</div>';
+        return;
+    }
     
     filteredCharacters.forEach(character => {
         const stats = getCharacterStats(character);
         
-        const mobileCard = document.createElement('div');
-        mobileCard.className = 'character-card';
-        mobileCard.dataset.character = character;
+        const card = document.createElement('div');
+        card.className = 'character-card';
+        card.dataset.character = character;
         
         if (character === selectedCharacter) {
-            mobileCard.classList.add('active');
+            card.classList.add('active');
         }
         
-        const mobileImg = createImageWithFallback(character);
-        mobileCard.innerHTML = `
+        const img = createImageWithFallback(character);
+        card.innerHTML = `
             <h3>${character}</h3>
             <div class="card-stats">
                 <span class="card-stat win">W: ${stats.wins}</span>
@@ -490,22 +432,34 @@ function renderMobileCharacterGrid() {
                 <span class="card-stat draw">D: ${stats.draws}</span>
             </div>
         `;
-        mobileCard.insertBefore(mobileImg, mobileCard.firstChild);
+        card.insertBefore(img, card.firstChild);
         
-        mobileCard.addEventListener('click', () => selectCharacterMobile(character));
-        mobileGrid.appendChild(mobileCard);
+        card.addEventListener('click', () => {
+            selectCharacter(character);
+            // On mobile, navigate to details panel
+            if (isMobile) {
+                navigateToPanel('details');
+            }
+        });
+        
+        grid.appendChild(card);
     });
-    
-    // Show message if no results
-    if (filteredCharacters.length === 0 && mobileSearchFilter) {
-        mobileGrid.innerHTML = '<div class="no-results">No characters found</div>';
-    }
 }
 
-// Setup sorting controls (both desktop and mobile)
+// Setup search functionality
+function setupSearch() {
+    const searchInput = document.getElementById('characterSearch');
+    if (!searchInput) return;
+    
+    searchInput.addEventListener('input', (e) => {
+        searchFilter = e.target.value.toLowerCase().trim();
+        renderCharacterGrid();
+    });
+}
+
+// Setup sorting controls
 function setupSorting() {
     const sortSelect = document.getElementById('sortSelect');
-    const mobileSortSelect = document.getElementById('mobileSortSelect');
     
     const options = {
         'name': 'Sort by: Name',
@@ -532,7 +486,7 @@ function setupSorting() {
         });
     }
     
-    function handleSortChange(sortType, sourceSelect) {
+    function handleSortChange(sortType) {
         // Toggle direction if selecting same sort
         if (currentSort === sortType) {
             sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
@@ -542,15 +496,7 @@ function setupSorting() {
             sortDirection = sortType === 'name' ? 'asc' : 'desc';
         }
         
-        // Update both selects
         updateSortUI(sortSelect);
-        updateSortUI(mobileSortSelect);
-        
-        // Sync the other select's value
-        if (sortSelect && sortSelect !== sourceSelect) sortSelect.value = currentSort;
-        if (mobileSortSelect && mobileSortSelect !== sourceSelect) mobileSortSelect.value = currentSort;
-        
-        // Re-render grid with new sort
         renderCharacterGrid();
         
         // Restore active state if character was selected
@@ -564,22 +510,83 @@ function setupSorting() {
         }
     }
     
-    // Desktop sort select
     if (sortSelect) {
         sortSelect.value = currentSort;
-        sortSelect.addEventListener('change', (e) => handleSortChange(e.target.value, sortSelect));
-        sortSelect.addEventListener('dblclick', () => {
-            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-            updateSortUI(sortSelect);
-            updateSortUI(mobileSortSelect);
-            renderCharacterGrid();
+        sortSelect.addEventListener('change', (e) => handleSortChange(e.target.value));
+    }
+}
+
+// Setup mobile tab navigation
+function setupMobileNavigation() {
+    const charactersTab = document.getElementById('charactersTab');
+    const detailsTab = document.getElementById('detailsTab');
+    const backBtn = document.getElementById('backToCharacters');
+    
+    // Tab clicks
+    if (charactersTab) {
+        charactersTab.addEventListener('click', () => {
+            if (isMobile) {
+                navigateToPanel('characters', true);
+            }
         });
     }
     
-    // Mobile sort select
-    if (mobileSortSelect) {
-        mobileSortSelect.value = currentSort;
-        mobileSortSelect.addEventListener('change', (e) => handleSortChange(e.target.value, mobileSortSelect));
+    if (detailsTab) {
+        detailsTab.addEventListener('click', () => {
+            if (isMobile && !detailsTab.disabled) {
+                navigateToPanel('details');
+            }
+        });
+    }
+    
+    // Back button
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            if (isMobile) {
+                navigateToPanel('characters', true);
+            }
+        });
+    }
+}
+
+// Navigate to panel with View Transitions API (mobile only)
+function navigateToPanel(panelName, isGoingBack = false) {
+    if (!isMobile || currentPanel === panelName) return;
+    
+    const charactersPanel = document.getElementById('charactersPanel');
+    const detailsPanel = document.getElementById('detailsPanel');
+    
+    // Use View Transitions API if available
+    if (document.startViewTransition) {
+        // Add direction class for animation
+        if (isGoingBack) {
+            document.documentElement.classList.add('going-back');
+        }
+        
+        const transition = document.startViewTransition(() => {
+            updateMobilePanelVisibility(panelName, charactersPanel, detailsPanel);
+        });
+        
+        transition.finished.then(() => {
+            document.documentElement.classList.remove('going-back');
+        });
+    } else {
+        // Fallback for browsers without View Transitions
+        updateMobilePanelVisibility(panelName, charactersPanel, detailsPanel);
+    }
+    
+    currentPanel = panelName;
+    updateTabState();
+}
+
+// Update mobile panel visibility
+function updateMobilePanelVisibility(panelName, charactersPanel, detailsPanel) {
+    if (panelName === 'characters') {
+        charactersPanel?.classList.add('active');
+        detailsPanel?.classList.remove('active');
+    } else {
+        charactersPanel?.classList.remove('active');
+        detailsPanel?.classList.add('active');
     }
 }
 
@@ -596,28 +603,33 @@ function selectCharacter(characterName) {
         }
     });
     
+    // Enable details tab and update selected name
+    const detailsTab = document.getElementById('detailsTab');
+    const selectedTabName = document.getElementById('selectedTabName');
+    if (detailsTab) {
+        detailsTab.disabled = false;
+    }
+    if (selectedTabName) {
+        // Get short name for display
+        const shortName = characterName.split(' ')[0];
+        selectedTabName.textContent = shortName;
+    }
+    
     // Find character's matchups
     const characterData = matchupsData.find(entry => entry && entry[characterName]);
     const matchups = characterData ? characterData[characterName] : [];
     
     // Display matchups
     displayMatchups(characterName, matchups);
-    
-    // Scroll matchup list to top if needed
-    const matchupsSection = document.querySelector('.matchups-section');
-    if (matchupsSection) {
-        matchupsSection.scrollTop = 0;
-    }
 }
 
 // Display matchups for selected character
 function displayMatchups(characterName, matchups) {
-    const display = document.getElementById('matchupDisplay');
     const nameElement = document.getElementById('selectedCharacterName');
     const imageElement = document.getElementById('selectedCharacterImage');
     const matchupsList = document.getElementById('matchupsList');
     
-    if (!display || !nameElement || !imageElement || !matchupsList) return;
+    if (!nameElement || !imageElement || !matchupsList) return;
 
     // Update header
     nameElement.textContent = characterName;
@@ -689,52 +701,52 @@ function displayMatchups(characterName, matchups) {
             matchupsList.appendChild(matchupItem);
         });
     }
-    
-    // Show display
-    display.style.display = 'flex';
-}
-
-// Setup search functionality
-function setupSearch() {
-    // Desktop search has been removed - search is now only in mobile sidenav
-    // This function is kept for compatibility but does nothing
 }
 
 // Setup view toggle between list and graph
 function setupViewToggle() {
     const viewButtons = document.querySelectorAll('.view-btn');
-    const characterSelector = document.querySelector('.character-selector');
-    const matchupDisplay = document.querySelector('.matchup-display');
+    const listViewContainer = document.getElementById('listViewContainer');
     const graphView = document.getElementById('graphVisualization');
     
     viewButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const view = btn.dataset.view;
             
-            // Update active button
-            viewButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Show/hide views
-            if (view === 'list') {
-                if (characterSelector) characterSelector.style.display = 'flex';
-                if (matchupDisplay) matchupDisplay.style.display = 'flex';
-                if (graphView) graphView.style.display = 'none';
+            // Use View Transitions API if available
+            if (document.startViewTransition) {
+                document.startViewTransition(() => {
+                    updateMainView(view, viewButtons, listViewContainer, graphView);
+                });
             } else {
-                if (characterSelector) characterSelector.style.display = 'none';
-                if (matchupDisplay) matchupDisplay.style.display = 'none';
-                if (graphView) graphView.style.display = 'flex';
-                // Resize graph when switching to graph view
-                setTimeout(() => {
-                    if (cy) {
-                        cy.resize();
-                        cy.fit();
-                        updateZoomLevel();
-                    }
-                }, 100);
+                updateMainView(view, viewButtons, listViewContainer, graphView);
             }
         });
     });
+}
+
+// Update main view (list/graph)
+function updateMainView(view, viewButtons, listViewContainer, graphView) {
+    // Update active button
+    viewButtons.forEach(b => b.classList.remove('active'));
+    document.querySelector(`.view-btn[data-view="${view}"]`)?.classList.add('active');
+    
+    // Show/hide views
+    if (view === 'list') {
+        if (listViewContainer) listViewContainer.style.display = 'flex';
+        if (graphView) graphView.style.display = 'none';
+    } else {
+        if (listViewContainer) listViewContainer.style.display = 'none';
+        if (graphView) graphView.style.display = 'flex';
+        // Resize graph when switching to graph view
+        setTimeout(() => {
+            if (cy) {
+                cy.resize();
+                cy.fit();
+                updateZoomLevel();
+            }
+        }, 100);
+    }
 }
 
 // Build graph data from matchups
@@ -816,7 +828,6 @@ function buildGraphData() {
                         label: 'wins'
                     };
                 } else if (result === 'draw') {
-                    // For draws, ensure consistent direction (smaller ID -> larger ID) to prevent duplicates
                     const id1 = sourceId < targetId ? sourceId : targetId;
                     const id2 = sourceId < targetId ? targetId : sourceId;
                     
@@ -836,7 +847,6 @@ function buildGraphData() {
                         existingEdges.add(edgeKey);
                         edges.push(edgeToAdd);
                         
-                        // Update stats based on unique edges
                         const sNode = nodes.get(parseInt(edgeToAdd.source));
                         const tNode = nodes.get(parseInt(edgeToAdd.target));
                         
@@ -863,7 +873,6 @@ function buildGraphData() {
 function initializeGraph() {
     const graphData = buildGraphData();
     
-    // Create unique edge IDs
     const edgeMap = new Map();
     graphData.edges.forEach((edge, index) => {
         const key = `${edge.source}-${edge.target}-${edge.type}`;
@@ -873,22 +882,20 @@ function initializeGraph() {
         }
     });
     
-    // Filter edges based on checkboxes
     function getFilteredEdges() {
         const showDraws = document.getElementById('showDraws')?.checked ?? true;
         const showLosses = document.getElementById('showLosses')?.checked ?? true;
         
         return graphData.edges.filter(edge => {
             if (edge.type === 'draw') return showDraws;
-            if (edge.type === 'win') return showLosses; // Wins show the win chains
+            if (edge.type === 'win') return showLosses;
             return true;
         });
     }
     
     const container = document.getElementById('cy');
-    if (!container) return; // Prevent null error if container is missing
+    if (!container) return;
 
-    // Initialize Cytoscape
     cy = cytoscape({
         container: container,
         elements: [
@@ -1017,7 +1024,12 @@ function initializeGraph() {
         // Switch to list view and select character
         const listViewBtn = document.querySelector('.view-btn[data-view="list"]');
         if (listViewBtn) listViewBtn.click();
-        setTimeout(() => selectCharacter(characterName), 100);
+        setTimeout(() => {
+            selectCharacter(characterName);
+            if (isMobile) {
+                navigateToPanel('details');
+            }
+        }, 100);
     });
     
     // Update stats display
@@ -1027,13 +1039,8 @@ function initializeGraph() {
     const edgeCountEl = document.getElementById('edgeCount');
     if (edgeCountEl) edgeCountEl.textContent = `Edges: ${getFilteredEdges().length}`;
     
-    // Setup zoom controls
     setupZoomControls();
-    
-    // Setup controls
     setupGraphControls();
-    
-    // Update zoom level display
     updateZoomLevel();
 }
 
@@ -1041,63 +1048,52 @@ function initializeGraph() {
 function setupZoomControls() {
     if (!cy) return;
     
-    // Zoom in button
     const zoomInBtn = document.getElementById('zoomIn');
     if (zoomInBtn) {
         zoomInBtn.addEventListener('click', () => {
             const currentZoom = cy.zoom();
-            const newZoom = Math.min(3.0, currentZoom * 1.2); // Max 300%
+            const newZoom = Math.min(3.0, currentZoom * 1.2);
             cy.zoom(newZoom);
             updateZoomLevel();
         });
     }
     
-    // Zoom out button
     const zoomOutBtn = document.getElementById('zoomOut');
     if (zoomOutBtn) {
         zoomOutBtn.addEventListener('click', () => {
             const currentZoom = cy.zoom();
-            const newZoom = Math.max(0.1, currentZoom * 0.8); // Min 10%
+            const newZoom = Math.max(0.1, currentZoom * 0.8);
             cy.zoom(newZoom);
             updateZoomLevel();
         });
     }
     
-    // Mouse wheel zoom with controlled sensitivity
     cy.on('wheel', (evt) => {
         evt.preventDefault();
         const originalEvent = evt.originalEvent;
         const delta = originalEvent.deltaY;
-        const button = originalEvent.button; // 0=left, 1=middle, 2=right
-        const buttons = originalEvent.buttons; // Bitmask of pressed buttons
+        const buttons = originalEvent.buttons;
         
-        // Check if middle mouse button is pressed or if it's a middle mouse wheel event
-        const isMiddleMouse = button === 1 || (buttons & 4) === 4;
+        const isMiddleMouse = (buttons & 4) === 4;
         
         const currentZoom = cy.zoom();
-        
-        // Adjust zoom step based on whether middle mouse is used
-        // Middle mouse button zoom should be more sensitive
         const zoomStep = isMiddleMouse ? 0.1 : 0.05;
         const zoomFactor = delta > 0 ? (1 - zoomStep) : (1 + zoomStep);
         let newZoom = currentZoom * zoomFactor;
         
-        // Limit zoom range (min: 0.1 = 10%, max: 3.0 = 300%)
         newZoom = Math.max(0.1, Math.min(3.0, newZoom));
         
         cy.zoom(newZoom);
         updateZoomLevel();
     });
     
-    // Handle middle mouse button down for panning prevention
     cy.on('mousedown', (evt) => {
         const originalEvent = evt.originalEvent;
-        if (originalEvent.button === 1) { // Middle mouse button
+        if (originalEvent.button === 1) {
             originalEvent.preventDefault();
         }
     });
     
-    // Prevent default middle mouse button behavior (opening links in new tab)
     const cyContainer = document.getElementById('cy');
     if (cyContainer) {
         cyContainer.addEventListener('mousedown', (evt) => {
@@ -1111,7 +1107,6 @@ function setupZoomControls() {
         });
     }
     
-    // Update zoom level on zoom events
     cy.on('zoom', () => {
         updateZoomLevel();
     });
@@ -1129,7 +1124,6 @@ function updateZoomLevel() {
 
 // Setup graph controls
 function setupGraphControls() {
-    // Reset view button
     const resetBtn = document.getElementById('resetGraph');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
@@ -1141,7 +1135,6 @@ function setupGraphControls() {
         });
     }
     
-    // Layout change button
     const layoutBtn = document.getElementById('layoutGraph');
     if (layoutBtn) {
         layoutBtn.addEventListener('click', () => {
@@ -1155,7 +1148,6 @@ function setupGraphControls() {
         });
     }
     
-    // Layout select dropdown
     const layoutSelect = document.getElementById('layoutSelect');
     if (layoutSelect) {
         layoutSelect.addEventListener('change', (e) => {
@@ -1164,7 +1156,6 @@ function setupGraphControls() {
         });
     }
     
-    // Filter checkboxes
     const showDraws = document.getElementById('showDraws');
     if (showDraws) {
         showDraws.addEventListener('change', () => {
@@ -1179,14 +1170,12 @@ function setupGraphControls() {
         });
     }
     
-    // Fullscreen button
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     const graphViz = document.querySelector('.graph-visualization');
     
     if (fullscreenBtn && graphViz) {
         fullscreenBtn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
-                // Enter fullscreen
                 if (graphViz.requestFullscreen) {
                     graphViz.requestFullscreen();
                 } else if (graphViz.webkitRequestFullscreen) {
@@ -1197,7 +1186,6 @@ function setupGraphControls() {
                 graphViz.classList.add('fullscreen');
                 fullscreenBtn.textContent = '⛶ Exit Fullscreen';
                 
-                // Resize graph after entering fullscreen
                 setTimeout(() => {
                     if (cy) {
                         cy.resize();
@@ -1206,7 +1194,6 @@ function setupGraphControls() {
                     }
                 }, 100);
             } else {
-                // Exit fullscreen
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.webkitExitFullscreen) {
@@ -1217,7 +1204,6 @@ function setupGraphControls() {
                 graphViz.classList.remove('fullscreen');
                 fullscreenBtn.textContent = '⛶ Fullscreen';
                 
-                // Resize graph after exiting fullscreen
                 setTimeout(() => {
                     if (cy) {
                         cy.resize();
@@ -1229,7 +1215,6 @@ function setupGraphControls() {
         });
     }
     
-    // Handle fullscreen change events
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
     document.addEventListener('msfullscreenchange', handleFullscreenChange);
@@ -1260,7 +1245,6 @@ function applyLayout(layoutName) {
         padding: 50
     };
     
-    // Layout-specific options
     if (layoutName === 'breadthfirst') {
         layoutOptions.directed = true;
         layoutOptions.spacingFactor = 1.5;
@@ -1289,13 +1273,11 @@ function updateGraph() {
     const showDraws = showDrawsEl ? showDrawsEl.checked : true;
     const showLosses = showLossesEl ? showLossesEl.checked : true;
     
-    // Remove all edges
     cy.elements('edge').remove();
     
-    // Add filtered edges
     const filteredEdges = graphData.edges.filter(edge => {
         if (edge.type === 'draw') return showDraws;
-        if (edge.type === 'win') return showLosses; // Wins show the win chains
+        if (edge.type === 'win') return showLosses;
         return true;
     });
     
@@ -1311,13 +1293,11 @@ function updateGraph() {
         });
     });
     
-    // Update edge count
     const edgeCountEl = document.getElementById('edgeCount');
     if (edgeCountEl) {
         edgeCountEl.textContent = `Edges: ${filteredEdges.length}`;
     }
     
-    // Reapply layout
     applyLayout(currentLayout);
     updateZoomLevel();
 }
