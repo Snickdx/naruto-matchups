@@ -20,6 +20,7 @@
     "cytoscape": "^3.33.1",
     "cytoscape-cose-bilkent": "^4.1.0",
     "cytoscape-dagre": "^2.5.0",
-    "dagre": "^0.8.5"
+    "dagre": "^0.8.5",
+    "firebase": "^12.6.0"
   }
 }
