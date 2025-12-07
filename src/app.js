@@ -716,8 +716,8 @@ function displayMatchups(characterName, matchups) {
                 opponentName = matchup.opponent;
                 result = matchup.result;
                 summary = matchup.summary || '';
-                mangaChapter = matchup.manga_chapter || '';
-                animeEpisode = matchup.anime_episode || '';
+                mangaChapter = matchup.manga || '';
+                animeEpisode = matchup.anime || '';
             } else {
                 // Old format
                 opponentName = Object.keys(matchup)[0];
@@ -1385,5 +1385,47 @@ function updateGraph() {
     updateZoomLevel();
 }
 
+// Setup About Modal
+function setupAboutModal() {
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeAbout = document.getElementById('closeAbout');
+    
+    if (aboutBtn && aboutModal) {
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (closeAbout && aboutModal) {
+        closeAbout.addEventListener('click', () => {
+            aboutModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Close on overlay click
+    if (aboutModal) {
+        aboutModal.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && aboutModal?.classList.contains('active')) {
+            aboutModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    init();
+    setupAboutModal();
+});
