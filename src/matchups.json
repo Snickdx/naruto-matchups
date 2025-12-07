@@ -1,496 +1,1852 @@
 [
   {
     "Naruto Uzumaki": [
-      {"Neji Hyūga": "win"},
-      {"Gaara": "win"},
-      {"Kiba Inuzuka": "win"},
-      {"Sasuke Uchiha": "draw"},
-      {"Nagato": "win"},
-      {"Kakuzu": "win"},
-      {"A (Third Raikage)": "win"},
-      {"Obito Uchiha": "win"},
-      {"Madara Uchiha": "draw"},
-      {"Kaguya Ōtsutsuki": "win"},
-      {"Orochimaru": "draw"},
-      {"Kabuto Yakushi": "draw"},
-      {"Shino Aburame": "win"},
-      {"Yamato": "win"},
-      {"Kakashi Hatake": "draw"},
-      {"Killer B": "draw"}
+      {
+        "opponent": "Neji Hyūga",
+        "result": "win",
+        "summary": "Naruto defeats Neji in the Chunin Exam preliminaries, proving that hard work and determination can overcome natural talent and destiny.",
+        "manga_chapter": "79-80",
+        "anime_episode": "47-48"
+      },
+      {
+        "opponent": "Gaara",
+        "result": "win",
+        "summary": "Naruto defeats Gaara in the final round of the Chunin Exams, using the power of the Nine-Tails and his determination to save his friend.",
+        "manga_chapter": "128-134",
+        "anime_episode": "78-80"
+      },
+      {
+        "opponent": "Kiba Inuzuka",
+        "result": "win",
+        "summary": "Naruto defeats Kiba in the Chunin Exam preliminaries using an unexpected strategy involving shadow clones and a fart.",
+        "manga_chapter": "75-76",
+        "anime_episode": "44-45"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "draw",
+        "summary": "The final battle between Naruto and Sasuke at the Valley of the End, ending in a draw with both losing consciousness.",
+        "manga_chapter": "697-699",
+        "anime_episode": "476-477"
+      },
+      {
+        "opponent": "Nagato",
+        "result": "win",
+        "summary": "Naruto defeats Pain (Nagato) after Pain destroys Konoha, using Sage Mode and eventually convincing Nagato to revive the villagers.",
+        "manga_chapter": "429-450",
+        "anime_episode": "163-175"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "win",
+        "summary": "Naruto defeats Kakuzu using his new Wind Release: Rasenshuriken technique, destroying Kakuzu's multiple hearts.",
+        "manga_chapter": "339-342",
+        "anime_episode": "88-89"
+      },
+      {
+        "opponent": "A (Third Raikage)",
+        "result": "win",
+        "summary": "Naruto defeats the reanimated Third Raikage during the Fourth Great Ninja War by redirecting his own attack back at him.",
+        "manga_chapter": "550-551",
+        "anime_episode": "308-309"
+      },
+      {
+        "opponent": "Obito Uchiha",
+        "result": "win",
+        "summary": "Naruto, along with Sasuke and the Allied Shinobi Forces, defeats Obito after he becomes the Ten-Tails jinchuriki.",
+        "manga_chapter": "638-656",
+        "anime_episode": "375-393"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "draw",
+        "summary": "Naruto and Sasuke fight against Madara Uchiha, but the battle ends inconclusively as Kaguya appears.",
+        "manga_chapter": "673-677",
+        "anime_episode": "458-462"
+      },
+      {
+        "opponent": "Kaguya Ōtsutsuki",
+        "result": "win",
+        "summary": "Naruto and Sasuke work together to seal Kaguya Ōtsutsuki, ending the threat she posed to the world.",
+        "manga_chapter": "678-690",
+        "anime_episode": "463-470"
+      },
+      {
+        "opponent": "Orochimaru",
+        "result": "draw",
+        "summary": "Naruto's first encounter with Orochimaru during the Chunin Exams, where Orochimaru places a Five Elements Seal on Naruto.",
+        "manga_chapter": "48-49",
+        "anime_episode": "27-28"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "draw",
+        "summary": "Naruto faces Kabuto during the Konoha Crush, but the battle is interrupted and ends without a clear winner.",
+        "manga_chapter": "130-131",
+        "anime_episode": "79"
+      },
+      {
+        "opponent": "Shino Aburame",
+        "result": "win",
+        "summary": "Naruto defeats Shino in a training match, showcasing his growth and improved skills.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Yamato",
+        "result": "win",
+        "summary": "Naruto defeats Yamato in a training session, demonstrating his improved control over the Nine-Tails' chakra.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "draw",
+        "summary": "Naruto and Kakashi engage in a training battle, ending in a draw as both demonstrate their skills.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Killer B",
+        "result": "draw",
+        "summary": "Naruto trains with Killer B to gain control over the Nine-Tails, with their sparring matches ending in draws.",
+        "manga_chapter": "413-414",
+        "anime_episode": "216-217"
+      }
     ]
   },
   {
     "Sasuke Uchiha": [
-      {"Naruto Uzumaki": "draw"},
-      {"Haku": "draw"},
-      {"Gaara": "win"},
-      {"Orochimaru": "lose"},
-      {"Deidara": "win"},
-      {"Itachi Uchiha": "lose"},
-      {"Killer B": "lose"},
-      {"A (Fourth Raikage)": "draw"},
-      {"Danzō Shimura": "win"},
-      {"Kabuto Yakushi": "win"},
-      {"Madara Uchiha": "draw"},
-      {"Kaguya Ōtsutsuki": "win"},
-      {"Rock Lee": "lose"},
-      {"Sai": "win"},
-      {"Yamato": "win"}
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "The final battle between Sasuke and Naruto at the Valley of the End, ending in a draw with both losing consciousness.",
+        "manga_chapter": "697-699",
+        "anime_episode": "476-477"
+      },
+      {
+        "opponent": "Haku",
+        "result": "draw",
+        "summary": "Sasuke fights Haku during the Land of Waves arc, protecting Naruto and awakening his Sharingan for the first time.",
+        "manga_chapter": "18-19",
+        "anime_episode": "11-12"
+      },
+      {
+        "opponent": "Gaara",
+        "result": "win",
+        "summary": "Sasuke fights Gaara during the Chunin Exams, using Chidori for the first time, though the battle is interrupted.",
+        "manga_chapter": "118-120",
+        "anime_episode": "67-68"
+      },
+      {
+        "opponent": "Orochimaru",
+        "result": "lose",
+        "summary": "Sasuke is defeated by Orochimaru during the Forest of Death, with Orochimaru placing a Cursed Seal on him.",
+        "manga_chapter": "45-46",
+        "anime_episode": "25-26"
+      },
+      {
+        "opponent": "Deidara",
+        "result": "win",
+        "summary": "Sasuke defeats Deidara using his intelligence and Sharingan abilities, forcing Deidara to use a suicide attack.",
+        "manga_chapter": "360-363",
+        "anime_episode": "123-124"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Sasuke fights his brother Itachi, but Itachi was already dying and allows Sasuke to win, revealing the truth about the Uchiha massacre.",
+        "manga_chapter": "386-402",
+        "anime_episode": "134-143"
+      },
+      {
+        "opponent": "Killer B",
+        "result": "lose",
+        "summary": "Sasuke and his team are defeated by Killer B, with Sasuke nearly dying and needing to be saved by his teammates.",
+        "manga_chapter": "414-415",
+        "anime_episode": "217-218"
+      },
+      {
+        "opponent": "A (Fourth Raikage)",
+        "result": "draw",
+        "summary": "Sasuke fights the Fourth Raikage at the Five Kage Summit, with the battle ending inconclusively.",
+        "manga_chapter": "461-464",
+        "anime_episode": "200-201"
+      },
+      {
+        "opponent": "Danzō Shimura",
+        "result": "win",
+        "summary": "Sasuke defeats Danzō, avenging Itachi and the Uchiha clan, though Danzō uses Izanagi to survive initially.",
+        "manga_chapter": "478-484",
+        "anime_episode": "211-216"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "win",
+        "summary": "Sasuke, with Itachi's help, defeats Kabuto using Izanami, ending the Impure World Reincarnation technique.",
+        "manga_chapter": "584-591",
+        "anime_episode": "332-339"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "draw",
+        "summary": "Sasuke and Naruto fight against Madara Uchiha, but the battle ends inconclusively as Kaguya appears.",
+        "manga_chapter": "673-677",
+        "anime_episode": "458-462"
+      },
+      {
+        "opponent": "Kaguya Ōtsutsuki",
+        "result": "win",
+        "summary": "Sasuke and Naruto work together to seal Kaguya Ōtsutsuki, ending the threat she posed to the world.",
+        "manga_chapter": "678-690",
+        "anime_episode": "463-470"
+      },
+      {
+        "opponent": "Rock Lee",
+        "result": "lose",
+        "summary": "Sasuke loses to Rock Lee in a sparring match before the Chunin Exams, realizing he needs to train harder.",
+        "manga_chapter": "36-37",
+        "anime_episode": "20-21"
+      },
+      {
+        "opponent": "Sai",
+        "result": "win",
+        "summary": "Sasuke defeats Sai during their first encounter, showcasing his improved skills after training with Orochimaru.",
+        "manga_chapter": "309-310",
+        "anime_episode": "53-54"
+      },
+      {
+        "opponent": "Yamato",
+        "result": "win",
+        "summary": "Sasuke defeats Yamato during their encounter, demonstrating his mastery of the Cursed Seal and new techniques.",
+        "manga_chapter": "309-310",
+        "anime_episode": "53-54"
+      }
     ]
   },
   {
     "Sakura Haruno": [
-      {"Ino Yamanaka": "draw"},
-      {"Sasori": "win"}
+      {
+        "opponent": "Ino Yamanaka",
+        "result": "draw",
+        "summary": "Sakura and Ino fight in the Chunin Exam preliminaries, ending in a draw as both exhaust themselves.",
+        "manga_chapter": "77-78",
+        "anime_episode": "46"
+      },
+      {
+        "opponent": "Sasori",
+        "result": "win",
+        "summary": "Sakura, with Chiyo's help, defeats Sasori by destroying his core, showcasing her growth as a medical ninja.",
+        "manga_chapter": "270-277",
+        "anime_episode": "19-24"
+      }
     ]
   },
   {
     "Kakashi Hatake": [
-      {"Zabuza Momochi": "win"},
-      {"Itachi Uchiha": "lose"},
-      {"Kakuzu": "draw"},
-      {"Nagato": "lose"},
-      {"Obito Uchiha": "win"},
-      {"Kaguya Ōtsutsuki": "win"},
-      {"Haku": "win"},
-      {"Kisame Hoshigaki": "draw"},
-      {"Deidara": "draw"},
-      {"Naruto Uzumaki": "draw"}
+      {
+        "opponent": "Zabuza Momochi",
+        "result": "win",
+        "summary": "Kakashi defeats Zabuza in the Land of Waves arc, using his Sharingan and strategic thinking.",
+        "manga_chapter": "20-25",
+        "anime_episode": "13-19"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Kakashi is defeated by Itachi's Tsukuyomi, falling into a coma for weeks.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "draw",
+        "summary": "Kakashi fights Kakuzu, holding his own until Naruto arrives with his new technique.",
+        "manga_chapter": "336-339",
+        "anime_episode": "87-88"
+      },
+      {
+        "opponent": "Nagato",
+        "result": "lose",
+        "summary": "Kakashi is killed by Pain's attack on Konoha, though he is later revived by Nagato.",
+        "manga_chapter": "429-430",
+        "anime_episode": "163-164"
+      },
+      {
+        "opponent": "Obito Uchiha",
+        "result": "win",
+        "summary": "Kakashi defeats Obito in their final battle, using Chidori to pierce Obito's heart.",
+        "manga_chapter": "656-657",
+        "anime_episode": "393-394"
+      },
+      {
+        "opponent": "Kaguya Ōtsutsuki",
+        "result": "win",
+        "summary": "Kakashi assists Naruto and Sasuke in sealing Kaguya, using his DMS abilities.",
+        "manga_chapter": "688-690",
+        "anime_episode": "469-470"
+      },
+      {
+        "opponent": "Haku",
+        "result": "win",
+        "summary": "Kakashi defeats Haku during the Land of Waves arc, though Haku sacrifices himself to save Zabuza.",
+        "manga_chapter": "19-20",
+        "anime_episode": "12-13"
+      },
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "draw",
+        "summary": "Kakashi fights Kisame, with the battle ending inconclusively as both demonstrate their skills.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Deidara",
+        "result": "draw",
+        "summary": "Kakashi fights Deidara, using Kamui to counter Deidara's explosive attacks.",
+        "manga_chapter": "276-277",
+        "anime_episode": "24-25"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Kakashi and Naruto engage in training battles, ending in draws as both demonstrate their skills.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Might Guy": [
-      {"Kisame Hoshigaki": "win"},
-      {"Madara Uchiha": "win"},
-      {"Kakashi Hatake": "draw"},
-      {"Rock Lee": "win"},
-      {"Neji Hyūga": "draw"},
-      {"Tenten": "win"}
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "win",
+        "summary": "Guy defeats Kisame multiple times, using his taijutsu skills and eventually defeating him with the Morning Peacock.",
+        "manga_chapter": "507-508",
+        "anime_episode": "253-254"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "win",
+        "summary": "Guy opens the Eighth Gate and fights Madara, nearly defeating him before collapsing from exhaustion.",
+        "manga_chapter": "668-672",
+        "anime_episode": "418-421"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "draw",
+        "summary": "Guy and Kakashi have numerous sparring matches throughout their lives, with most ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Rock Lee",
+        "result": "win",
+        "summary": "Guy defeats Rock Lee in training matches, teaching him the ways of taijutsu.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Neji Hyūga",
+        "result": "draw",
+        "summary": "Guy and Neji engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Tenten",
+        "result": "win",
+        "summary": "Guy defeats Tenten in training matches, showcasing his superior taijutsu skills.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Rock Lee": [
-      {"Sasuke Uchiha": "win"},
-      {"Gaara": "lose"},
-      {"Kimimaro": "lose"},
-      {"Naruto Uzumaki": "draw"},
-      {"Neji Hyūga": "lose"},
-      {"Tenten": "win"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "win",
+        "summary": "Rock Lee defeats Sasuke in a sparring match before the Chunin Exams, showcasing his speed and taijutsu.",
+        "manga_chapter": "36-37",
+        "anime_episode": "20-21"
+      },
+      {
+        "opponent": "Gaara",
+        "result": "lose",
+        "summary": "Rock Lee fights Gaara in the Chunin Exams, opening the Fifth Gate but ultimately losing.",
+        "manga_chapter": "85-88",
+        "anime_episode": "48-50"
+      },
+      {
+        "opponent": "Kimimaro",
+        "result": "lose",
+        "summary": "Rock Lee fights Kimimaro while protecting Naruto, opening multiple gates but still losing.",
+        "manga_chapter": "214-216",
+        "anime_episode": "126-127"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Rock Lee and Naruto engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Neji Hyūga",
+        "result": "lose",
+        "summary": "Rock Lee loses to Neji in training matches, unable to overcome Neji's Gentle Fist style.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Tenten",
+        "result": "win",
+        "summary": "Rock Lee defeats Tenten in training matches, showcasing his superior taijutsu skills.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Neji Hyūga": [
-      {"Hinata Hyūga": "win"},
-      {"Naruto Uzumaki": "lose"},
-      {"Kidōmaru": "win"},
-      {"Rock Lee": "win"},
-      {"Tenten": "win"}
+      {
+        "opponent": "Hinata Hyūga",
+        "result": "win",
+        "summary": "Neji defeats Hinata in the Chunin Exam preliminaries, nearly killing her before being stopped.",
+        "manga_chapter": "78-79",
+        "anime_episode": "46-47"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Neji loses to Naruto in the Chunin Exam preliminaries, with Naruto proving that hard work can overcome destiny.",
+        "manga_chapter": "79-80",
+        "anime_episode": "47-48"
+      },
+      {
+        "opponent": "Kidōmaru",
+        "result": "win",
+        "summary": "Neji defeats Kidōmaru during the Sasuke Retrieval arc, using his Byakugan and Gentle Fist techniques.",
+        "manga_chapter": "199-203",
+        "anime_episode": "116-120"
+      },
+      {
+        "opponent": "Rock Lee",
+        "result": "win",
+        "summary": "Neji defeats Rock Lee in training matches, using his Gentle Fist to counter Lee's taijutsu.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Tenten",
+        "result": "win",
+        "summary": "Neji defeats Tenten in training matches, easily countering her weapon-based attacks.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Gaara": [
-      {"Rock Lee": "win"},
-      {"Naruto Uzumaki": "lose"},
-      {"Deidara": "lose"},
-      {"Kimimaro": "win"},
-      {"Gengetsu Hōzuki": "draw"},
-      {"Sasuke Uchiha": "draw"}
+      {
+        "opponent": "Rock Lee",
+        "result": "win",
+        "summary": "Gaara defeats Rock Lee in the Chunin Exams, surviving Lee's Fifth Gate attack.",
+        "manga_chapter": "85-88",
+        "anime_episode": "48-50"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Gaara loses to Naruto in the final round of the Chunin Exams, changing his perspective on life.",
+        "manga_chapter": "128-134",
+        "anime_episode": "78-80"
+      },
+      {
+        "opponent": "Deidara",
+        "result": "lose",
+        "summary": "Gaara is defeated and captured by Deidara, who uses explosives to defeat the Kazekage.",
+        "manga_chapter": "247-248",
+        "anime_episode": "2-3"
+      },
+      {
+        "opponent": "Kimimaro",
+        "result": "win",
+        "summary": "Gaara defeats Kimimaro during the Sasuke Retrieval arc, using his sand techniques.",
+        "manga_chapter": "216-217",
+        "anime_episode": "127-128"
+      },
+      {
+        "opponent": "Gengetsu Hōzuki",
+        "result": "draw",
+        "summary": "Gaara fights the reanimated Gengetsu during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "draw",
+        "summary": "Gaara and Sasuke fight during the Chunin Exams, but the battle is interrupted.",
+        "manga_chapter": "118-120",
+        "anime_episode": "67-68"
+      }
     ]
   },
   {
     "Shikamaru Nara": [
-      {"Hidan": "win"},
-      {"Tayuya": "win"},
-      {"Temari": "lose"}
+      {
+        "opponent": "Hidan",
+        "result": "win",
+        "summary": "Shikamaru defeats Hidan by trapping him in a forest and burying him alive, avenging Asuma's death.",
+        "manga_chapter": "339-345",
+        "anime_episode": "87-91"
+      },
+      {
+        "opponent": "Tayuya",
+        "result": "win",
+        "summary": "Shikamaru defeats Tayuya during the Sasuke Retrieval arc using his Shadow Possession technique.",
+        "manga_chapter": "196-198",
+        "anime_episode": "113-115"
+      },
+      {
+        "opponent": "Temari",
+        "result": "lose",
+        "summary": "Shikamaru forfeits his match against Temari in the Chunin Exams, though he could have won.",
+        "manga_chapter": "81",
+        "anime_episode": "48"
+      }
     ]
   },
   {
     "Choji Akimichi": [
-      {"Jirōbō": "win"},
-      {"Kakuzu": "draw"},
-      {"Asuma Sarutobi": "lose"}
+      {
+        "opponent": "Jirōbō",
+        "result": "win",
+        "summary": "Choji defeats Jirōbō during the Sasuke Retrieval arc, using his Expansion Jutsu and nearly dying.",
+        "manga_chapter": "189-195",
+        "anime_episode": "110-112"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "draw",
+        "summary": "Choji fights Kakuzu alongside his teammates, with the battle ending inconclusively.",
+        "manga_chapter": "336-339",
+        "anime_episode": "87-88"
+      },
+      {
+        "opponent": "Asuma Sarutobi",
+        "result": "lose",
+        "summary": "Choji loses to Asuma in training matches, learning from his sensei.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Ino Yamanaka": [
-      {"Sakura Haruno": "draw"},
-      {"Sai": "draw"},
-      {"Kakuzu": "draw"}
+      {
+        "opponent": "Sakura Haruno",
+        "result": "draw",
+        "summary": "Ino and Sakura fight in the Chunin Exam preliminaries, ending in a draw as both exhaust themselves.",
+        "manga_chapter": "77-78",
+        "anime_episode": "46"
+      },
+      {
+        "opponent": "Sai",
+        "result": "draw",
+        "summary": "Ino and Sai engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "draw",
+        "summary": "Ino assists in the fight against Kakuzu, using her Mind Transfer technique.",
+        "manga_chapter": "336-339",
+        "anime_episode": "87-88"
+      }
     ]
   },
   {
     "Hinata Hyūga": [
-      {"Neji Hyūga": "lose"},
-      {"Nagato": "lose"}
+      {
+        "opponent": "Neji Hyūga",
+        "result": "lose",
+        "summary": "Hinata loses to Neji in the Chunin Exam preliminaries, nearly dying before being saved.",
+        "manga_chapter": "78-79",
+        "anime_episode": "46-47"
+      },
+      {
+        "opponent": "Nagato",
+        "result": "lose",
+        "summary": "Hinata is defeated by Pain while trying to protect Naruto, though she survives.",
+        "manga_chapter": "437-438",
+        "anime_episode": "166-167"
+      }
     ]
   },
   {
     "Kiba Inuzuka": [
-      {"Naruto Uzumaki": "lose"},
-      {"Sakon and Ukon": "lose"},
-      {"Sakura Haruno": "draw"}
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Kiba loses to Naruto in the Chunin Exam preliminaries, falling for Naruto's shadow clone trick.",
+        "manga_chapter": "75-76",
+        "anime_episode": "44-45"
+      },
+      {
+        "opponent": "Sakon and Ukon",
+        "result": "lose",
+        "summary": "Kiba is defeated by Sakon and Ukon during the Sasuke Retrieval arc, needing to be saved.",
+        "manga_chapter": "186-188",
+        "anime_episode": "107-109"
+      },
+      {
+        "opponent": "Sakura Haruno",
+        "result": "draw",
+        "summary": "Kiba and Sakura engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Shino Aburame": [
-      {"Kankurō": "win"}
+      {
+        "opponent": "Kankurō",
+        "result": "win",
+        "summary": "Shino defeats Kankurō in the Chunin Exam preliminaries using his insect techniques.",
+        "manga_chapter": "76-77",
+        "anime_episode": "45-46"
+      }
     ]
   },
   {
     "Tenten": [
-      {"Temari": "lose"},
-      {"Kakuzu": "draw"}
+      {
+        "opponent": "Temari",
+        "result": "lose",
+        "summary": "Tenten loses to Temari in the Chunin Exam preliminaries, being easily defeated.",
+        "manga_chapter": "76",
+        "anime_episode": "45"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "draw",
+        "summary": "Tenten assists in the fight against Kakuzu, with the battle ending inconclusively.",
+        "manga_chapter": "336-339",
+        "anime_episode": "87-88"
+      }
     ]
   },
   {
     "Kurenai Yūhi": [
-      {"Itachi Uchiha": "lose"},
-      {"Kisame Hoshigaki": "draw"}
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Kurenai is defeated by Itachi's genjutsu, being easily outmatched.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "draw",
+        "summary": "Kurenai fights Kisame, with the battle ending inconclusively.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      }
     ]
   },
   {
     "Asuma Sarutobi": [
-      {"Itachi Uchiha": "lose"},
-      {"Kisame Hoshigaki": "draw"},
-      {"Kakuzu": "lose"},
-      {"Hidan": "lose"}
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Asuma is defeated by Itachi, being easily outmatched by the Uchiha's abilities.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "draw",
+        "summary": "Asuma fights Kisame, with the battle ending inconclusively.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "lose",
+        "summary": "Asuma is killed by Kakuzu and Hidan, sacrificing himself to protect his students.",
+        "manga_chapter": "325-326",
+        "anime_episode": "80-81"
+      },
+      {
+        "opponent": "Hidan",
+        "result": "lose",
+        "summary": "Asuma is killed by Hidan using his ritual technique, though he manages to damage Hidan.",
+        "manga_chapter": "325-326",
+        "anime_episode": "80-81"
+      }
     ]
   },
   {
     "Yamato": [
-      {"Sasuke Uchiha": "lose"},
-      {"Kabuto Yakushi": "draw"},
-      {"Naruto Uzumaki": "draw"},
-      {"Sai": "draw"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Yamato is defeated by Sasuke during their encounter, being outmatched by Sasuke's new abilities.",
+        "manga_chapter": "309-310",
+        "anime_episode": "53-54"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "draw",
+        "summary": "Yamato fights Kabuto, with the battle ending inconclusively.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Yamato and Naruto engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Sai",
+        "result": "draw",
+        "summary": "Yamato and Sai engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Sai": [
-      {"Sasuke Uchiha": "lose"},
-      {"Deidara": "draw"},
-      {"Sasori": "draw"},
-      {"Yamato": "draw"},
-      {"Ino Yamanaka": "draw"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Sai is defeated by Sasuke during their first encounter, being easily outmatched.",
+        "manga_chapter": "309-310",
+        "anime_episode": "53-54"
+      },
+      {
+        "opponent": "Deidara",
+        "result": "draw",
+        "summary": "Sai fights Deidara, with the battle ending inconclusively.",
+        "manga_chapter": "276-277",
+        "anime_episode": "24-25"
+      },
+      {
+        "opponent": "Sasori",
+        "result": "draw",
+        "summary": "Sai fights Sasori, with the battle ending inconclusively.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Yamato",
+        "result": "draw",
+        "summary": "Sai and Yamato engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Ino Yamanaka",
+        "result": "draw",
+        "summary": "Sai and Ino engage in training matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Jiraiya": [
-      {"Orochimaru": "draw"},
-      {"Tsunade": "draw"},
-      {"Itachi Uchiha": "draw"},
-      {"Nagato": "lose"},
-      {"Hanzō": "draw"}
+      {
+        "opponent": "Orochimaru",
+        "result": "draw",
+        "summary": "Jiraiya and Orochimaru fight multiple times throughout their lives, with most battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Tsunade",
+        "result": "draw",
+        "summary": "Jiraiya and Tsunade engage in sparring matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "draw",
+        "summary": "Jiraiya fights Itachi, with the battle ending inconclusively as Itachi retreats.",
+        "manga_chapter": "144-145",
+        "anime_episode": "84-85"
+      },
+      {
+        "opponent": "Nagato",
+        "result": "lose",
+        "summary": "Jiraiya is killed by Pain (Nagato) while gathering information in the Hidden Rain Village.",
+        "manga_chapter": "381-383",
+        "anime_episode": "130-133"
+      },
+      {
+        "opponent": "Hanzō",
+        "result": "draw",
+        "summary": "Jiraiya fights Hanzō during the Second Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Orochimaru": [
-      {"Hiruzen Sarutobi": "win"},
-      {"Jiraiya": "draw"},
-      {"Tsunade": "draw"},
-      {"Naruto Uzumaki": "draw"},
-      {"Sasuke Uchiha": "lose"},
-      {"Itachi Uchiha": "lose"},
-      {"Kabuto Yakushi": "lose"},
-      {"Anko Mitarashi": "win"}
+      {
+        "opponent": "Hiruzen Sarutobi",
+        "result": "win",
+        "summary": "Orochimaru kills the Third Hokage during the Konoha Crush, though Hiruzen seals Orochimaru's arms.",
+        "manga_chapter": "123-127",
+        "anime_episode": "72-77"
+      },
+      {
+        "opponent": "Jiraiya",
+        "result": "draw",
+        "summary": "Orochimaru and Jiraiya fight multiple times throughout their lives, with most battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Tsunade",
+        "result": "draw",
+        "summary": "Orochimaru and Tsunade fight, with the battle ending inconclusively.",
+        "manga_chapter": "171-175",
+        "anime_episode": "95-96"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Orochimaru encounters Naruto during the Chunin Exams, placing a seal on him.",
+        "manga_chapter": "48-49",
+        "anime_episode": "27-28"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Orochimaru is defeated by Sasuke when Sasuke takes over his body.",
+        "manga_chapter": "343-344",
+        "anime_episode": "113-114"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Orochimaru is easily defeated by Itachi's genjutsu, being sealed within Itachi's Susanoo.",
+        "manga_chapter": "143",
+        "anime_episode": "83"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "lose",
+        "summary": "Orochimaru is absorbed by Kabuto, who gains Orochimaru's powers.",
+        "manga_chapter": "593-594",
+        "anime_episode": "340-341"
+      },
+      {
+        "opponent": "Anko Mitarashi",
+        "result": "win",
+        "summary": "Orochimaru defeats Anko, his former student, during the Chunin Exams.",
+        "manga_chapter": "47",
+        "anime_episode": "26"
+      }
     ]
   },
   {
     "Tsunade": [
-      {"Orochimaru": "draw"},
-      {"Kabuto Yakushi": "win"},
-      {"Madara Uchiha": "lose"},
-      {"Jiraiya": "draw"},
-      {"Nagato": "draw"}
+      {
+        "opponent": "Orochimaru",
+        "result": "draw",
+        "summary": "Tsunade fights Orochimaru, with the battle ending inconclusively.",
+        "manga_chapter": "171-175",
+        "anime_episode": "95-96"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "win",
+        "summary": "Tsunade defeats Kabuto, though she struggles due to her hemophobia.",
+        "manga_chapter": "171-175",
+        "anime_episode": "95-96"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "lose",
+        "summary": "Tsunade is defeated by Madara during the Fourth Great Ninja War, being cut in half.",
+        "manga_chapter": "560-561",
+        "anime_episode": "312-313"
+      },
+      {
+        "opponent": "Jiraiya",
+        "result": "draw",
+        "summary": "Tsunade and Jiraiya engage in sparring matches, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Nagato",
+        "result": "draw",
+        "summary": "Tsunade fights Nagato's Pain, with the battle ending inconclusively.",
+        "manga_chapter": "429-430",
+        "anime_episode": "163-164"
+      }
     ]
   },
   {
     "Itachi Uchiha": [
-      {"Kakashi Hatake": "win"},
-      {"Kurenai Yūhi": "win"},
-      {"Asuma Sarutobi": "win"},
-      {"Jiraiya": "draw"},
-      {"Sasuke Uchiha": "win"},
-      {"Orochimaru": "win"},
-      {"Kabuto Yakushi": "win"},
-      {"Deidara": "win"}
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "win",
+        "summary": "Itachi defeats Kakashi using Tsukuyomi, putting Kakashi in a coma.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Kurenai Yūhi",
+        "result": "win",
+        "summary": "Itachi easily defeats Kurenai's genjutsu, showcasing his superior abilities.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Asuma Sarutobi",
+        "result": "win",
+        "summary": "Itachi defeats Asuma, easily outmatching the jonin.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Jiraiya",
+        "result": "draw",
+        "summary": "Itachi fights Jiraiya, but retreats to avoid a prolonged battle.",
+        "manga_chapter": "144-145",
+        "anime_episode": "84-85"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "win",
+        "summary": "Itachi fights Sasuke, but allows himself to be defeated, revealing the truth about the Uchiha massacre.",
+        "manga_chapter": "386-402",
+        "anime_episode": "134-143"
+      },
+      {
+        "opponent": "Orochimaru",
+        "result": "win",
+        "summary": "Itachi easily defeats Orochimaru using genjutsu, sealing him within his Susanoo.",
+        "manga_chapter": "143",
+        "anime_episode": "83"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "win",
+        "summary": "Itachi, with Sasuke's help, defeats Kabuto using Izanami, ending the Impure World Reincarnation.",
+        "manga_chapter": "584-591",
+        "anime_episode": "332-339"
+      },
+      {
+        "opponent": "Deidara",
+        "result": "win",
+        "summary": "Itachi defeats Deidara easily, causing Deidara to join the Akatsuki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Kisame Hoshigaki": [
-      {"Asuma Sarutobi": "draw"},
-      {"Might Guy": "lose"},
-      {"Killer B": "lose"},
-      {"Itachi Uchiha": "draw"},
-      {"Kakashi Hatake": "draw"}
+      {
+        "opponent": "Asuma Sarutobi",
+        "result": "draw",
+        "summary": "Kisame fights Asuma, with the battle ending inconclusively.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      },
+      {
+        "opponent": "Might Guy",
+        "result": "lose",
+        "summary": "Kisame is defeated by Guy multiple times, eventually being killed by Guy.",
+        "manga_chapter": "507-508",
+        "anime_episode": "253-254"
+      },
+      {
+        "opponent": "Killer B",
+        "result": "lose",
+        "summary": "Kisame is defeated by Killer B, being captured and later committing suicide.",
+        "manga_chapter": "507-508",
+        "anime_episode": "253-254"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "draw",
+        "summary": "Kisame and Itachi are partners, with their sparring matches ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "draw",
+        "summary": "Kisame fights Kakashi, with the battle ending inconclusively.",
+        "manga_chapter": "142-143",
+        "anime_episode": "82-83"
+      }
     ]
   },
   {
     "Deidara": [
-      {"Gaara": "win"},
-      {"Naruto Uzumaki": "draw"},
-      {"Sasuke Uchiha": "lose"},
-      {"Itachi Uchiha": "lose"},
-      {"Han": "win"}
+      {
+        "opponent": "Gaara",
+        "result": "win",
+        "summary": "Deidara defeats and captures Gaara, the Kazekage, using his explosive techniques.",
+        "manga_chapter": "247-248",
+        "anime_episode": "2-3"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Deidara fights Naruto, with the battle ending inconclusively.",
+        "manga_chapter": "276-277",
+        "anime_episode": "24-25"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Deidara is defeated by Sasuke, forcing him to use a suicide attack that fails.",
+        "manga_chapter": "360-363",
+        "anime_episode": "123-124"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Deidara is easily defeated by Itachi, causing him to join the Akatsuki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Han",
+        "result": "win",
+        "summary": "Deidara defeats and captures Han, the Five-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Sasori": [
-      {"Sakura Haruno": "lose"},
-      {"Kankurō": "win"},
-      {"Chiyo": "lose"}
+      {
+        "opponent": "Sakura Haruno",
+        "result": "lose",
+        "summary": "Sasori is defeated by Sakura and Chiyo, with his core being destroyed.",
+        "manga_chapter": "270-277",
+        "anime_episode": "19-24"
+      },
+      {
+        "opponent": "Kankurō",
+        "result": "win",
+        "summary": "Sasori defeats Kankurō, poisoning him with his puppets.",
+        "manga_chapter": "247-248",
+        "anime_episode": "2-3"
+      },
+      {
+        "opponent": "Chiyo",
+        "result": "lose",
+        "summary": "Sasori is defeated by Chiyo and Sakura, though Chiyo sacrifices herself.",
+        "manga_chapter": "270-277",
+        "anime_episode": "19-24"
+      }
     ]
   },
   {
     "Kakuzu": [
-      {"Asuma Sarutobi": "win"},
-      {"Kakashi Hatake": "draw"},
-      {"Naruto Uzumaki": "lose"},
-      {"Hashirama Senju": "lose"}
+      {
+        "opponent": "Asuma Sarutobi",
+        "result": "win",
+        "summary": "Kakuzu kills Asuma alongside Hidan, taking his heart.",
+        "manga_chapter": "325-326",
+        "anime_episode": "80-81"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "draw",
+        "summary": "Kakuzu fights Kakashi, with the battle ending inconclusively until Naruto arrives.",
+        "manga_chapter": "336-339",
+        "anime_episode": "87-88"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Kakuzu is defeated by Naruto using the Wind Release: Rasenshuriken.",
+        "manga_chapter": "339-342",
+        "anime_episode": "88-89"
+      },
+      {
+        "opponent": "Hashirama Senju",
+        "result": "lose",
+        "summary": "Kakuzu is defeated by Hashirama in the past, losing his original heart.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Hidan": [
-      {"Asuma Sarutobi": "win"},
-      {"Shikamaru Nara": "lose"},
-      {"Yugito Nii": "win"}
+      {
+        "opponent": "Asuma Sarutobi",
+        "result": "win",
+        "summary": "Hidan kills Asuma using his ritual technique, taking his blood and performing the curse.",
+        "manga_chapter": "325-326",
+        "anime_episode": "80-81"
+      },
+      {
+        "opponent": "Shikamaru Nara",
+        "result": "lose",
+        "summary": "Hidan is defeated by Shikamaru, who traps him in a forest and buries him alive.",
+        "manga_chapter": "339-345",
+        "anime_episode": "87-91"
+      },
+      {
+        "opponent": "Yugito Nii",
+        "result": "win",
+        "summary": "Hidan defeats and captures Yugito, the Two-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Nagato": [
-      {"Jiraiya": "win"},
-      {"Kakashi Hatake": "win"},
-      {"Naruto Uzumaki": "lose"},
-      {"Hinata Hyūga": "win"},
-      {"Utakata": "win"}
+      {
+        "opponent": "Jiraiya",
+        "result": "win",
+        "summary": "Nagato, as Pain, kills Jiraiya while gathering information in the Hidden Rain Village.",
+        "manga_chapter": "381-383",
+        "anime_episode": "130-133"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "win",
+        "summary": "Nagato, as Pain, kills Kakashi during the attack on Konoha.",
+        "manga_chapter": "429-430",
+        "anime_episode": "163-164"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Nagato is defeated by Naruto, who convinces him to revive the villagers.",
+        "manga_chapter": "429-450",
+        "anime_episode": "163-175"
+      },
+      {
+        "opponent": "Hinata Hyūga",
+        "result": "win",
+        "summary": "Nagato, as Pain, defeats Hinata when she tries to protect Naruto.",
+        "manga_chapter": "437-438",
+        "anime_episode": "166-167"
+      },
+      {
+        "opponent": "Utakata",
+        "result": "win",
+        "summary": "Nagato defeats and captures Utakata, the Six-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Konan": [
-      {"Jiraiya": "win"},
-      {"Obito Uchiha": "lose"}
+      {
+        "opponent": "Jiraiya",
+        "result": "win",
+        "summary": "Konan fights Jiraiya alongside Nagato, though Jiraiya escapes.",
+        "manga_chapter": "381-383",
+        "anime_episode": "130-133"
+      },
+      {
+        "opponent": "Obito Uchiha",
+        "result": "lose",
+        "summary": "Konan is killed by Obito after setting up a trap using paper bombs.",
+        "manga_chapter": "509-510",
+        "anime_episode": "255-256"
+      }
     ]
   },
   {
     "Obito Uchiha": [
-      {"Minato Namikaze": "lose"},
-      {"Konan": "win"},
-      {"Yagura Karatachi": "win"},
-      {"Naruto Uzumaki": "lose"},
-      {"Kakashi Hatake": "lose"}
+      {
+        "opponent": "Minato Namikaze",
+        "result": "lose",
+        "summary": "Obito is defeated by Minato during the Nine-Tails attack on Konoha.",
+        "manga_chapter": "502-503",
+        "anime_episode": "248-249"
+      },
+      {
+        "opponent": "Konan",
+        "result": "win",
+        "summary": "Obito kills Konan after she sets up a trap, using Izanagi to survive.",
+        "manga_chapter": "509-510",
+        "anime_episode": "255-256"
+      },
+      {
+        "opponent": "Yagura Karatachi",
+        "result": "win",
+        "summary": "Obito defeats and controls Yagura, the Four-Tails jinchuriki and Mizukage.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Obito is defeated by Naruto and the Allied Shinobi Forces after becoming the Ten-Tails jinchuriki.",
+        "manga_chapter": "638-656",
+        "anime_episode": "375-393"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "lose",
+        "summary": "Obito is defeated by Kakashi in their final battle, being pierced by Chidori.",
+        "manga_chapter": "656-657",
+        "anime_episode": "393-394"
+      }
     ]
   },
   {
     "Zabuza Momochi": [
-      {"Kakashi Hatake": "lose"},
-      {"Haku": "win"}
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "lose",
+        "summary": "Zabuza is defeated by Kakashi in the Land of Waves arc, dying to protect Haku.",
+        "manga_chapter": "20-25",
+        "anime_episode": "13-19"
+      },
+      {
+        "opponent": "Haku",
+        "result": "win",
+        "summary": "Zabuza defeats Haku in training, though Haku was holding back.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Haku": [
-      {"Sasuke Uchiha": "draw"},
-      {"Naruto Uzumaki": "draw"},
-      {"Kakashi Hatake": "lose"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "draw",
+        "summary": "Haku fights Sasuke, protecting Zabuza and awakening Sasuke's Sharingan.",
+        "manga_chapter": "18-19",
+        "anime_episode": "11-12"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Haku fights Naruto, with the battle ending when Haku sacrifices himself.",
+        "manga_chapter": "19-20",
+        "anime_episode": "12-13"
+      },
+      {
+        "opponent": "Kakashi Hatake",
+        "result": "lose",
+        "summary": "Haku is defeated by Kakashi, sacrificing himself to save Zabuza.",
+        "manga_chapter": "19-20",
+        "anime_episode": "12-13"
+      }
     ]
   },
   {
     "Kimimaro": [
-      {"Rock Lee": "win"},
-      {"Gaara": "lose"},
-      {"Naruto Uzumaki": "win"}
+      {
+        "opponent": "Rock Lee",
+        "result": "win",
+        "summary": "Kimimaro defeats Rock Lee during the Sasuke Retrieval arc, though Lee opens multiple gates.",
+        "manga_chapter": "214-216",
+        "anime_episode": "126-127"
+      },
+      {
+        "opponent": "Gaara",
+        "result": "lose",
+        "summary": "Kimimaro is defeated by Gaara, dying from his illness before the battle ends.",
+        "manga_chapter": "216-217",
+        "anime_episode": "127-128"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "win",
+        "summary": "Kimimaro defeats Naruto during the Sasuke Retrieval arc, though Naruto was exhausted.",
+        "manga_chapter": "213-214",
+        "anime_episode": "125-126"
+      }
     ]
   },
   {
     "Kidōmaru": [
-      {"Neji Hyūga": "lose"}
+      {
+        "opponent": "Neji Hyūga",
+        "result": "lose",
+        "summary": "Kidōmaru is defeated by Neji during the Sasuke Retrieval arc, being killed by Neji's Gentle Fist.",
+        "manga_chapter": "199-203",
+        "anime_episode": "116-120"
+      }
     ]
   },
   {
     "Tayuya": [
-      {"Shikamaru Nara": "lose"},
-      {"Temari": "lose"}
+      {
+        "opponent": "Shikamaru Nara",
+        "result": "lose",
+        "summary": "Tayuya is defeated by Shikamaru during the Sasuke Retrieval arc, being trapped by his shadow.",
+        "manga_chapter": "196-198",
+        "anime_episode": "113-115"
+      },
+      {
+        "opponent": "Temari",
+        "result": "lose",
+        "summary": "Tayuya is defeated by Temari, who arrives to help Shikamaru.",
+        "manga_chapter": "198",
+        "anime_episode": "115"
+      }
     ]
   },
   {
     "Jirōbō": [
-      {"Choji Akimichi": "lose"}
+      {
+        "opponent": "Choji Akimichi",
+        "result": "lose",
+        "summary": "Jirōbō is defeated by Choji during the Sasuke Retrieval arc, being killed by Choji's Expansion Jutsu.",
+        "manga_chapter": "189-195",
+        "anime_episode": "110-112"
+      }
     ]
   },
   {
     "Sakon and Ukon": [
-      {"Kiba Inuzuka": "win"},
-      {"Kankurō": "lose"}
+      {
+        "opponent": "Kiba Inuzuka",
+        "result": "win",
+        "summary": "Sakon and Ukon defeat Kiba during the Sasuke Retrieval arc, nearly killing him.",
+        "manga_chapter": "186-188",
+        "anime_episode": "107-109"
+      },
+      {
+        "opponent": "Kankurō",
+        "result": "lose",
+        "summary": "Sakon and Ukon are defeated by Kankurō, who arrives to help Kiba.",
+        "manga_chapter": "188",
+        "anime_episode": "109"
+      }
     ]
   },
   {
     "Hiruzen Sarutobi": [
-      {"Orochimaru": "lose"}
+      {
+        "opponent": "Orochimaru",
+        "result": "lose",
+        "summary": "Hiruzen is killed by Orochimaru during the Konoha Crush, though he seals Orochimaru's arms.",
+        "manga_chapter": "123-127",
+        "anime_episode": "72-77"
+      }
     ]
   },
   {
     "Minato Namikaze": [
-      {"Obito Uchiha": "win"},
-      {"A (Fourth Raikage)": "draw"},
-      {"Killer B": "draw"}
+      {
+        "opponent": "Obito Uchiha",
+        "result": "win",
+        "summary": "Minato defeats Obito during the Nine-Tails attack on Konoha, using his Flying Thunder God technique.",
+        "manga_chapter": "502-503",
+        "anime_episode": "248-249"
+      },
+      {
+        "opponent": "A (Fourth Raikage)",
+        "result": "draw",
+        "summary": "Minato fights the Fourth Raikage, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Killer B",
+        "result": "draw",
+        "summary": "Minato fights Killer B, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Tobirama Senju": [
-      {"Madara Uchiha": "draw"}
+      {
+        "opponent": "Madara Uchiha",
+        "result": "draw",
+        "summary": "Tobirama fights Madara during their lifetimes, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "A (Fourth Raikage)": [
-      {"Sasuke Uchiha": "draw"},
-      {"Naruto Uzumaki": "draw"},
-      {"Minato Namikaze": "draw"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "draw",
+        "summary": "The Fourth Raikage fights Sasuke at the Five Kage Summit, with the battle ending inconclusively.",
+        "manga_chapter": "461-464",
+        "anime_episode": "200-201"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "The Fourth Raikage fights Naruto, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Minato Namikaze",
+        "result": "draw",
+        "summary": "The Fourth Raikage fights Minato, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Killer B": [
-      {"Kisame Hoshigaki": "win"},
-      {"Naruto Uzumaki": "draw"},
-      {"Sasuke Uchiha": "win"},
-      {"Minato Namikaze": "draw"}
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "win",
+        "summary": "Killer B defeats Kisame, capturing him and forcing him to commit suicide.",
+        "manga_chapter": "507-508",
+        "anime_episode": "253-254"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Killer B trains Naruto, with their sparring matches ending in draws.",
+        "manga_chapter": "413-414",
+        "anime_episode": "216-217"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "win",
+        "summary": "Killer B defeats Sasuke and his team, nearly killing Sasuke.",
+        "manga_chapter": "414-415",
+        "anime_episode": "217-218"
+      },
+      {
+        "opponent": "Minato Namikaze",
+        "result": "draw",
+        "summary": "Killer B fights Minato, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Ōnoki": [
-      {"Mū": "draw"},
-      {"Madara Uchiha": "lose"}
+      {
+        "opponent": "Mū",
+        "result": "draw",
+        "summary": "Ōnoki fights his former teacher Mū during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "lose",
+        "summary": "Ōnoki is defeated by Madara during the Fourth Great Ninja War, being overwhelmed by Madara's power.",
+        "manga_chapter": "560-561",
+        "anime_episode": "312-313"
+      }
     ]
   },
   {
     "Mei Terumī": [
-      {"Sasuke Uchiha": "draw"},
-      {"Madara Uchiha": "lose"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "draw",
+        "summary": "Mei fights Sasuke at the Five Kage Summit, with the battle ending inconclusively.",
+        "manga_chapter": "464-465",
+        "anime_episode": "201-202"
+      },
+      {
+        "opponent": "Madara Uchiha",
+        "result": "lose",
+        "summary": "Mei is defeated by Madara during the Fourth Great Ninja War, being overwhelmed by his power.",
+        "manga_chapter": "560-561",
+        "anime_episode": "312-313"
+      }
     ]
   },
   {
     "Gengetsu Hōzuki": [
-      {"Gaara": "draw"},
-      {"Ōnoki": "draw"}
+      {
+        "opponent": "Gaara",
+        "result": "draw",
+        "summary": "Gengetsu fights Gaara during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      },
+      {
+        "opponent": "Ōnoki",
+        "result": "draw",
+        "summary": "Gengetsu fights Ōnoki during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      }
     ]
   },
   {
     "Danzō Shimura": [
-      {"Sasuke Uchiha": "lose"},
-      {"Shisui Uchiha": "win"}
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Danzō is killed by Sasuke, avenging Itachi and the Uchiha clan.",
+        "manga_chapter": "478-484",
+        "anime_episode": "211-216"
+      },
+      {
+        "opponent": "Shisui Uchiha",
+        "result": "win",
+        "summary": "Danzō steals Shisui's eye, leading to Shisui's death.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Kabuto Yakushi": [
-      {"Orochimaru": "win"},
-      {"Tsunade": "lose"},
-      {"Itachi Uchiha": "lose"},
-      {"Sasuke Uchiha": "lose"},
-      {"Naruto Uzumaki": "draw"},
-      {"Yamato": "draw"}
+      {
+        "opponent": "Orochimaru",
+        "result": "win",
+        "summary": "Kabuto absorbs Orochimaru, gaining his powers and becoming stronger.",
+        "manga_chapter": "593-594",
+        "anime_episode": "340-341"
+      },
+      {
+        "opponent": "Tsunade",
+        "result": "lose",
+        "summary": "Kabuto is defeated by Tsunade, though she struggles due to her hemophobia.",
+        "manga_chapter": "171-175",
+        "anime_episode": "95-96"
+      },
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Kabuto is defeated by Itachi and Sasuke using Izanami, ending the Impure World Reincarnation.",
+        "manga_chapter": "584-591",
+        "anime_episode": "332-339"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Kabuto is defeated by Sasuke and Itachi using Izanami.",
+        "manga_chapter": "584-591",
+        "anime_episode": "332-339"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "draw",
+        "summary": "Kabuto fights Naruto during the Konoha Crush, with the battle ending inconclusively.",
+        "manga_chapter": "130-131",
+        "anime_episode": "79"
+      },
+      {
+        "opponent": "Yamato",
+        "result": "draw",
+        "summary": "Kabuto fights Yamato, with the battle ending inconclusively.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Chiyo": [
-      {"Sasori": "win"}
+      {
+        "opponent": "Sasori",
+        "result": "win",
+        "summary": "Chiyo, with Sakura's help, defeats Sasori, sacrificing herself in the process.",
+        "manga_chapter": "270-277",
+        "anime_episode": "19-24"
+      }
     ]
   },
   {
     "Anko Mitarashi": [
-      {"Orochimaru": "lose"},
-      {"Kabuto Yakushi": "draw"}
+      {
+        "opponent": "Orochimaru",
+        "result": "lose",
+        "summary": "Anko is defeated by Orochimaru during the Chunin Exams, being easily outmatched by her former teacher.",
+        "manga_chapter": "47",
+        "anime_episode": "26"
+      },
+      {
+        "opponent": "Kabuto Yakushi",
+        "result": "draw",
+        "summary": "Anko fights Kabuto, with the battle ending inconclusively.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Temari": [
-      {"Tenten": "win"},
-      {"Shikamaru Nara": "win"},
-      {"Tayuya": "win"}
+      {
+        "opponent": "Tenten",
+        "result": "win",
+        "summary": "Temari easily defeats Tenten in the Chunin Exam preliminaries.",
+        "manga_chapter": "76",
+        "anime_episode": "45"
+      },
+      {
+        "opponent": "Shikamaru Nara",
+        "result": "win",
+        "summary": "Temari wins against Shikamaru in the Chunin Exams, though Shikamaru forfeits.",
+        "manga_chapter": "81",
+        "anime_episode": "48"
+      },
+      {
+        "opponent": "Tayuya",
+        "result": "win",
+        "summary": "Temari defeats Tayuya, arriving to help Shikamaru during the Sasuke Retrieval arc.",
+        "manga_chapter": "198",
+        "anime_episode": "115"
+      }
     ]
   },
   {
     "Kankurō": [
-      {"Shino Aburame": "lose"},
-      {"Sasori": "lose"},
-      {"Sakon and Ukon": "win"}
+      {
+        "opponent": "Shino Aburame",
+        "result": "lose",
+        "summary": "Kankurō loses to Shino in the Chunin Exam preliminaries.",
+        "manga_chapter": "76-77",
+        "anime_episode": "45-46"
+      },
+      {
+        "opponent": "Sasori",
+        "result": "lose",
+        "summary": "Kankurō is defeated and poisoned by Sasori.",
+        "manga_chapter": "247-248",
+        "anime_episode": "2-3"
+      },
+      {
+        "opponent": "Sakon and Ukon",
+        "result": "win",
+        "summary": "Kankurō defeats Sakon and Ukon, arriving to help Kiba during the Sasuke Retrieval arc.",
+        "manga_chapter": "188",
+        "anime_episode": "109"
+      }
     ]
   },
   {
     "Madara Uchiha": [
-      {"Hashirama Senju": "lose"},
-      {"Might Guy": "lose"},
-      {"Naruto Uzumaki": "lose"},
-      {"Tobirama Senju": "draw"}
+      {
+        "opponent": "Hashirama Senju",
+        "result": "lose",
+        "summary": "Madara is defeated by Hashirama at the Valley of the End, ending their rivalry.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Might Guy",
+        "result": "lose",
+        "summary": "Madara is nearly defeated by Guy's Eighth Gate, though Guy collapses from exhaustion.",
+        "manga_chapter": "668-672",
+        "anime_episode": "418-421"
+      },
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Madara is defeated by Naruto and Sasuke, though the battle ends when Kaguya appears.",
+        "manga_chapter": "673-677",
+        "anime_episode": "458-462"
+      },
+      {
+        "opponent": "Tobirama Senju",
+        "result": "draw",
+        "summary": "Madara fights Tobirama during their lifetimes, with battles ending in draws.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Hashirama Senju": [
-      {"Madara Uchiha": "win"},
-      {"Kakuzu": "win"}
+      {
+        "opponent": "Madara Uchiha",
+        "result": "win",
+        "summary": "Hashirama defeats Madara at the Valley of the End, ending their rivalry.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      },
+      {
+        "opponent": "Kakuzu",
+        "result": "win",
+        "summary": "Hashirama defeats Kakuzu in the past, taking his original heart.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Kaguya Ōtsutsuki": [
-      {"Naruto Uzumaki": "lose"},
-      {"Sasuke Uchiha": "lose"}
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "Kaguya is sealed by Naruto and Sasuke, ending the threat she posed to the world.",
+        "manga_chapter": "678-690",
+        "anime_episode": "463-470"
+      },
+      {
+        "opponent": "Sasuke Uchiha",
+        "result": "lose",
+        "summary": "Kaguya is sealed by Naruto and Sasuke, ending the threat she posed to the world.",
+        "manga_chapter": "678-690",
+        "anime_episode": "463-470"
+      }
     ]
   },
   {
     "Mū": [
-      {"Ōnoki": "draw"},
-      {"Gaara": "draw"}
+      {
+        "opponent": "Ōnoki",
+        "result": "draw",
+        "summary": "Mū fights his former student Ōnoki during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      },
+      {
+        "opponent": "Gaara",
+        "result": "draw",
+        "summary": "Mū fights Gaara during the Fourth Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "548-549",
+        "anime_episode": "306-307"
+      }
     ]
   },
   {
     "A (Third Raikage)": [
-      {"Naruto Uzumaki": "lose"}
+      {
+        "opponent": "Naruto Uzumaki",
+        "result": "lose",
+        "summary": "The Third Raikage is defeated by Naruto during the Fourth Great Ninja War, with Naruto redirecting his own attack.",
+        "manga_chapter": "550-551",
+        "anime_episode": "308-309"
+      }
     ]
   },
   {
     "Rasa": [
-      {"Orochimaru": "lose"}
+      {
+        "opponent": "Orochimaru",
+        "result": "lose",
+        "summary": "Rasa is killed by Orochimaru during the Konoha Crush.",
+        "manga_chapter": "123-127",
+        "anime_episode": "72-77"
+      }
     ]
   },
   {
     "Fugaku Uchiha": [
-      {"Itachi Uchiha": "lose"}
+      {
+        "opponent": "Itachi Uchiha",
+        "result": "lose",
+        "summary": "Fugaku is killed by Itachi during the Uchiha massacre, though he accepts his fate.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Shisui Uchiha": [
-      {"Danzō Shimura": "lose"}
+      {
+        "opponent": "Danzō Shimura",
+        "result": "lose",
+        "summary": "Shisui is killed by Danzō, who steals his eye, leading to Shisui's suicide.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Yagura Karatachi": [
-      {"Obito Uchiha": "lose"}
+      {
+        "opponent": "Obito Uchiha",
+        "result": "lose",
+        "summary": "Yagura is controlled by Obito, becoming a puppet Mizukage.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Utakata": [
-      {"Nagato": "lose"}
+      {
+        "opponent": "Nagato",
+        "result": "lose",
+        "summary": "Utakata is defeated and captured by Pain (Nagato), the Six-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Yugito Nii": [
-      {"Hidan": "lose"}
+      {
+        "opponent": "Hidan",
+        "result": "lose",
+        "summary": "Yugito is defeated and captured by Hidan, the Two-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Rōshi": [
-      {"Kisame Hoshigaki": "lose"}
+      {
+        "opponent": "Kisame Hoshigaki",
+        "result": "lose",
+        "summary": "Rōshi is defeated and captured by Kisame, the Four-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Han": [
-      {"Deidara": "lose"}
+      {
+        "opponent": "Deidara",
+        "result": "lose",
+        "summary": "Han is defeated and captured by Deidara, the Five-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Fū": [
-      {"Hidan": "lose"}
+      {
+        "opponent": "Hidan",
+        "result": "lose",
+        "summary": "Fū is defeated and captured by Hidan, the Seven-Tails jinchuriki.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   },
   {
     "Hanzō": [
-      {"Jiraiya": "draw"}
+      {
+        "opponent": "Jiraiya",
+        "result": "draw",
+        "summary": "Hanzō fights Jiraiya during the Second Great Ninja War, with the battle ending in a draw.",
+        "manga_chapter": "N/A",
+        "anime_episode": "N/A"
+      }
     ]
   }
 ]

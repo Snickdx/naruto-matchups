@@ -149,7 +149,15 @@ function calculateCharacterStats() {
             
             matchups.forEach(matchup => {
                 if (!matchup || typeof matchup !== 'object') return;
-                const result = Object.values(matchup)[0];
+                // Support both old format {"Opponent": "win"} and new format {opponent: "Opponent", result: "win"}
+                let result;
+                if (matchup.result) {
+                    // New format
+                    result = matchup.result;
+                } else {
+                    // Old format - get first value
+                    result = Object.values(matchup)[0];
+                }
                 if (result === 'win') wins++;
                 else if (result === 'lose') losses++;
                 else if (result === 'draw') draws++;
@@ -642,7 +650,15 @@ function displayMatchups(characterName, matchups) {
     if (Array.isArray(matchups)) {
         matchups.forEach(matchup => {
             if (!matchup) return;
-            const result = Object.values(matchup)[0];
+            // Support both old format {"Opponent": "win"} and new format {opponent: "Opponent", result: "win"}
+            let result;
+            if (matchup.result) {
+                // New format
+                result = matchup.result;
+            } else {
+                // Old format - get first value
+                result = Object.values(matchup)[0];
+            }
             if (result === 'win') wins++;
             else if (result === 'lose') losses++;
             else if (result === 'draw') draws++;
@@ -676,9 +692,26 @@ function displayMatchups(characterName, matchups) {
     } else {
         matchups.forEach(matchup => {
             if (!matchup) return;
-            const opponentName = Object.keys(matchup)[0];
-            if (!opponentName) return;
-            const result = matchup[opponentName];
+            
+            // Support both old format {"Opponent": "win"} and new format {opponent: "Opponent", result: "win", ...}
+            let opponentName, result, summary, mangaChapter, animeEpisode;
+            
+            if (matchup.opponent && matchup.result) {
+                // New format
+                opponentName = matchup.opponent;
+                result = matchup.result;
+                summary = matchup.summary || '';
+                mangaChapter = matchup.manga_chapter || '';
+                animeEpisode = matchup.anime_episode || '';
+            } else {
+                // Old format
+                opponentName = Object.keys(matchup)[0];
+                if (!opponentName) return;
+                result = matchup[opponentName];
+                summary = '';
+                mangaChapter = '';
+                animeEpisode = '';
+            }
             
             const matchupItem = document.createElement('div');
             matchupItem.className = `matchup-item ${result}`;
@@ -689,10 +722,32 @@ function displayMatchups(characterName, matchups) {
             const context = contextMatch ? contextMatch[1] : null;
             
             const opponentImg = createImageWithFallback(displayName, 'matchup-opponent-image');
+            
+            // Build details HTML
+            let detailsHTML = '';
+            if (summary || mangaChapter || animeEpisode) {
+                detailsHTML = '<div class="matchup-details">';
+                if (summary) {
+                    detailsHTML += `<div class="matchup-summary">${summary}</div>`;
+                }
+                if (mangaChapter || animeEpisode) {
+                    detailsHTML += '<div class="matchup-references">';
+                    if (mangaChapter && mangaChapter !== 'N/A') {
+                        detailsHTML += `<span class="matchup-reference"><span class="reference-label">📖 Manga:</span> ${mangaChapter}</span>`;
+                    }
+                    if (animeEpisode && animeEpisode !== 'N/A') {
+                        detailsHTML += `<span class="matchup-reference"><span class="reference-label">📺 Anime:</span> ${animeEpisode}</span>`;
+                    }
+                    detailsHTML += '</div>';
+                }
+                detailsHTML += '</div>';
+            }
+            
             matchupItem.innerHTML = `
                 <div class="matchup-info">
                     <div class="matchup-opponent-name">${displayName}</div>
                     ${context ? `<div class="matchup-context">${context}</div>` : ''}
+                    ${detailsHTML}
                 </div>
                 <div class="matchup-result ${result}">${result}</div>
             `;
@@ -792,10 +847,20 @@ function buildGraphData() {
             // Process each matchup
             characterMatchups.forEach(matchup => {
                 if (!matchup || typeof matchup !== 'object') return;
-                const opponentName = Object.keys(matchup)[0];
-                if (!opponentName) return;
+                
+                // Support both old format {"Opponent": "win"} and new format {opponent: "Opponent", result: "win"}
+                let opponentName, result;
+                if (matchup.opponent && matchup.result) {
+                    // New format
+                    opponentName = matchup.opponent;
+                    result = matchup.result;
+                } else {
+                    // Old format
+                    opponentName = Object.keys(matchup)[0];
+                    if (!opponentName) return;
+                    result = matchup[opponentName];
+                }
 
-                const result = matchup[opponentName];
                 const cleanOpponentName = opponentName.split('(')[0].trim();
                 const targetId = getNodeId(cleanOpponentName);
                 

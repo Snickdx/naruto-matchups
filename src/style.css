@@ -606,6 +606,39 @@ body {
     font-style: italic;
 }
 
+.matchup-details {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.matchup-summary {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.matchup-references {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.matchup-reference {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.reference-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
 .matchup-result {
     padding: 6px 14px;
     border-radius: 15px;
