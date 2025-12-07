@@ -1,6 +1,9 @@
 // Import styles
 import './style.css';
 
+// Initialize Firebase Analytics
+import './firebase.js';
+
 // Import libraries
 import cytoscape from 'cytoscape';
 import dagre from 'dagre';

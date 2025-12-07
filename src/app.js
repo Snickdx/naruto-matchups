@@ -1,3 +1,6 @@
+// Firebase Analytics
+import { trackCharacterSelect, trackViewChange, trackSearch } from './firebase.js';
+
 // Character data storage
 let matchupsData = [];
 let allCharacters = [];
@@ -455,6 +458,7 @@ function renderCharacterGrid() {
 }
 
 // Setup search functionality
+let searchDebounceTimer = null;
 function setupSearch() {
     const searchInput = document.getElementById('characterSearch');
     if (!searchInput) return;
@@ -462,6 +466,14 @@ function setupSearch() {
     searchInput.addEventListener('input', (e) => {
         searchFilter = e.target.value.toLowerCase().trim();
         renderCharacterGrid();
+        
+        // Debounced analytics tracking for search
+        clearTimeout(searchDebounceTimer);
+        if (searchFilter.length >= 2) {
+            searchDebounceTimer = setTimeout(() => {
+                trackSearch(searchFilter);
+            }, 1000);
+        }
     });
 }
 
@@ -602,6 +614,9 @@ function updateMobilePanelVisibility(panelName, charactersPanel, detailsPanel) {
 function selectCharacter(characterName) {
     if (!characterName) return;
     selectedCharacter = characterName;
+    
+    // Track character selection in analytics
+    trackCharacterSelect(characterName);
     
     // Update active card
     document.querySelectorAll('.character-card').forEach(card => {
@@ -782,6 +797,9 @@ function setupViewToggle() {
 
 // Update main view (list/graph)
 function updateMainView(view, viewButtons, listViewContainer, graphView) {
+    // Track view change in analytics
+    trackViewChange(view);
+    
     // Update active button
     viewButtons.forEach(b => b.classList.remove('active'));
     document.querySelector(`.view-btn[data-view="${view}"]`)?.classList.add('active');
